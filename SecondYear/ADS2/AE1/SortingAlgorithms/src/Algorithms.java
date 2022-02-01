@@ -41,9 +41,6 @@ public class Algorithms {
 		int key, j;
 		for (int i=p+1; i <= r; i++) {
 			key = inputArray[i];
-			if (key == 52) {
-				
-			}
 			j = i - 1;
 			while (j >= p && inputArray[j] > key) {
 				inputArray[j+1] = inputArray[j];
@@ -56,7 +53,7 @@ public class Algorithms {
 
 	public static int[] insertionSort(int[] inputArray) {
 		int key, j;
-		for (int i=1; i < inputArray.length; i++) {
+		for (int i=1; i <= inputArray.length-1; i++) {
 			key = inputArray[i];
 			j = i - 1;
 			while (j >= 0 && inputArray[j] > key) {
@@ -70,7 +67,7 @@ public class Algorithms {
 	
 	public static int[] reverseInsertionSort(int[] inputArray) {
 		int key, j;
-		for (int i=0; i < inputArray.length; i++) {
+		for (int i=0; i <= inputArray.length-1; i++) {
 			key = inputArray[i];
 			j = i - 1;
 			while (j >= 0 && inputArray[j] < key) {
