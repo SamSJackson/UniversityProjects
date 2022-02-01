@@ -25,6 +25,13 @@ public class Algorithms {
 		A[j] = temp;
 	}
 	
+	private static int min(int[] inputArray, int i, int j) {
+		return inputArray[i] < inputArray[j] ? i : j;
+	}
+	
+	private static int max(int[] inputArray, int i, int j) {
+		return inputArray[i] > inputArray[j] ? i : j;
+	}
 	
 	// quickSort algorithms & helpers
 	private static int partitionRightMost(int[] inputArray, int p, int r) {
@@ -40,6 +47,21 @@ public class Algorithms {
 		return i+1;
 	}
 	
+	private static int medianOfThree(int[] inputArray, int low, int high) {
+		int mid = (high + low) / 2;
+		
+		if (inputArray[low] > inputArray[mid])
+			swap(inputArray, low, mid);
+		if (inputArray[low] > inputArray[high])
+			swap(inputArray, low, high);
+		if (inputArray[mid] > inputArray[high])
+			swap(inputArray, mid, high);
+		
+		swap(inputArray, mid, high);
+		return inputArray[high];
+		
+	}
+	
 	public static void quickSort(int[] inputArray, int p, int r) {
 		if (p < r) {
 			int q = partitionRightMost(inputArray, p, r);
@@ -48,13 +70,17 @@ public class Algorithms {
 		}
 	}
 	
+	public static void quickSortMedianOfThree(int[] inputArray, int p, int r) {
+		
+	}
+	
 	public static void quickSortInsertion(int[] inputArray, int p, int r, int k) {
 		quickSortInsertionSubarrays(inputArray, p, r, k);
 		insertionSort(inputArray);
 	}
 	
-	public static void quickSortInsertionSubarrays(int[] inputArray, int p, int r, int k) {
-		// (p-r) is size of subarray
+	private static void quickSortInsertionSubarrays(int[] inputArray, int p, int r, int k) {
+		// (r-p) is size of subarray
 		if ((r-p) < k)
 			return;
 		if (p < r) {
