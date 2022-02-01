@@ -35,7 +35,7 @@ public class TestAlgorithms {
 		return allPaths;
 	}
 	
-	private static boolean testIfSorted(int[] inputArray) {
+	public static boolean testIfSorted(int[] inputArray) {
 		for (int i=1; i < inputArray.length; i++) {
 			if (inputArray[i] < inputArray[i-1]) {
 				consoleOutput("false");
@@ -59,10 +59,7 @@ public class TestAlgorithms {
 	
 	private static void testOneSort(Path path) throws IOException { 
 		int[] integerArray = readFile(path);
-		Algorithms.printArray(integerArray);
-		Algorithms.insertionSort(integerArray, 0, integerArray.length-1);
-		Algorithms.printArray(integerArray);
-		testIfSorted(integerArray);
+		Algorithms.quickSortInsertion(integerArray, 0, integerArray.length-1, 4);
 	}
 	
 	// Testing to make sure that everything is working

@@ -49,14 +49,18 @@ public class Algorithms {
 	}
 	
 	public static void quickSortInsertion(int[] inputArray, int p, int r, int k) {
-		if (r < k) {
+		quickSortInsertionSubarrays(inputArray, p, r, k);
+		insertionSort(inputArray);
+	}
+	
+	public static void quickSortInsertionSubarrays(int[] inputArray, int p, int r, int k) {
+		// (p-r) is size of subarray
+		if ((r-p) < k)
 			return;
-		} else if (p < r) {
+		if (p < r) {
 			int q = partitionRightMost(inputArray, p, r);
-			quickSortInsertion(inputArray, p, q-1, k);
-			quickSortInsertion(inputArray, q+1, r, k);
-		} else {
-			insertionSort(inputArray, p, r);
+			quickSortInsertionSubarrays(inputArray, p, q-1, k);
+			quickSortInsertionSubarrays(inputArray, q+1, r, k);
 		}
 	}
 	
