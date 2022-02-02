@@ -50,26 +50,26 @@ public class Algorithms {
 	}
 	
 	
-	// Returning the start and end points of equal partitions
+	// Returning the indices of the subarray of equal pivots
 	private static int[] partitionThreeWay(int[] inputArray, int p, int r) {
-		// Picking the pivot to be number at end of index
-		// Could even use median of three method here
+		// Want to return the indices of the subarray of equal pivots
+		int lessThan=p;
+		int greaterThan=r;
+		int i = p;
 		int pivot = inputArray[r];
-		int i = p + 1;
-		int[] outputArray = new int[2];
-		
-		while (i < p) {
-			if (inputArray[i] > pivot) {
-				swap(inputArray, i, r--);
-			} else if (inputArray[i] < pivot) {
-				swap(inputArray, p++, i++);
+		while (i <= greaterThan) {
+			if (inputArray[i] < pivot) {
+				swap(inputArray, i, lessThan);
+				lessThan++;
+				i++;
+			} else if (inputArray[i] > pivot) {
+				swap(inputArray, i, greaterThan);
+				greaterThan--;
 			} else {
 				i++;
 			}
 		}
-		outputArray[0] = p;
-		outputArray[1] = r;
-		return outputArray;
+		return new int[] {lessThan, greaterThan};
 	}
 	
 	private static void medianOfThree(int[] inputArray, int low, int high) {
@@ -105,15 +105,12 @@ public class Algorithms {
 	
 	public static void quickSortThreeWay(int[] inputArray, int p, int r) {
 		if (p < r) {
-			// Use quicksort on two parts, parts less than pivot and greater than pivot
-			int[] pivots = partitionThreeWay(inputArray, p, r);
-			int startPivot = pivots[0];
-			int endPivot = pivots[1];
-			System.out.println("Start: " + startPivot + " End: " + endPivot);
-			// quickSort, before pivot
-			quickSortThreeWay(inputArray, 0, startPivot-1);
-			// quickSort, after pivot
-			quickSortThreeWay(inputArray, endPivot+1, r);
+			int[] pivotPoints = partitionThreeWay(inputArray, p, r);
+			int startPivot = pivotPoints[0];
+			int endPivot = pivotPoints[1];
+			//System.out.println("start: " + startPivot + " end: " + endPivot);
+			quickSort(inputArray, 0, startPivot-1);
+			quickSort(inputArray, endPivot+1, r);
 		}
 	}
 	
