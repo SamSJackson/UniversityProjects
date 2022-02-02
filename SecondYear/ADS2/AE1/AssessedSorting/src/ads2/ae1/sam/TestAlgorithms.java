@@ -50,11 +50,14 @@ public class TestAlgorithms {
 	
 	private static boolean testRunQuicksort() throws IOException {
 		Path[] allPaths = getPaths();
-		for (Path path : allPaths) { 
+		for (Path path : allPaths) {
 			int[] integerArray = readFile(path);
-			Algorithms.quickSortThreeWay(integerArray, 0, integerArray.length - 1);
+			consoleOutput("Current size: " + integerArray.length);
+			Algorithms.quickSortThreeWay(integerArray, 0, integerArray.length-1);
+			//TimeSortingAlgorithms.compareQuickSortAlgorithms(integerArray, 1000);
 			if (!testIfSorted(integerArray))
 				return false;
+			//consoleOutput("");
 		}
 		consoleOutput("DONE");
 		return true;

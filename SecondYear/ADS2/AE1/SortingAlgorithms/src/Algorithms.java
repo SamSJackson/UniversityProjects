@@ -117,7 +117,7 @@ public class Algorithms {
 		return inputArray;
 	}
 	
-	private static int[] merge(int[] inputArray, int p, int q, int r) {
+	private static void merge(int[] inputArray, int p, int q, int r) {
 		int n_1 = q - p + 1;
 		int n_2 = r - q;
 		int[] L = new int[n_1+1];
@@ -144,7 +144,6 @@ public class Algorithms {
 				inputArray[k] = R[j++];
 			}
 		}
-		return inputArray;
 	}
 	
 	public static int[] mergeInsertionSort(int[] inputArray, int p, int r) {

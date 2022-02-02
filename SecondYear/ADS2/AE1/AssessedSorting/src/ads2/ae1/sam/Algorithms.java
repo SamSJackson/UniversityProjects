@@ -7,7 +7,7 @@ public class Algorithms {
 	 * 
 	 * quickSort (primary // DONE, insertion method // DONE,  3-way, median-of-three // DONE) 
 	 * insertionSort // DONE
-	 * mergeSort
+	 * mergeSort // DONE
 	 * Algorithm of O(n^2)
 	 */
 	
@@ -35,6 +35,35 @@ public class Algorithms {
 		return inputArray[i] > inputArray[j] ? i : j;
 	}
 	
+	private static void merge(int[] inputArray, int p, int q, int r) {
+		int n_1 = q - p + 1;
+		int n_2 = r - q;
+		int[] L = new int[n_1+1];
+		
+		// L = [p, ... , q]
+		for (int i=0; i < n_1; i++) {
+			L[i] = inputArray[p+i];
+		}
+		int[] R = new int[n_2+1];
+		
+		// R = [q+1, ... , r]
+		for (int i=0; i < n_2; i++) {
+			R[i] = inputArray[q + i + 1];
+		}
+		
+		L[n_1] = Integer.MAX_VALUE;
+		R[n_2] = Integer.MAX_VALUE;
+		int i = 0;
+		int j = 0;
+		for (int k=p; k <= r; k++) {
+			if (L[i] <= R[j]) {
+				inputArray[k] = L[i++];
+			} else {
+				inputArray[k] = R[j++];
+			}
+		}
+	}
+	
 	// quickSort algorithms & helpers
 	private static int partition(int[] inputArray, int p, int r) {
 		int pivot = inputArray[r];
@@ -53,8 +82,8 @@ public class Algorithms {
 	// Returning the indices of the subarray of equal pivots
 	private static int[] partitionThreeWay(int[] inputArray, int p, int r) {
 		// Want to return the indices of the subarray of equal pivots
-		int lessThan=p;
-		int greaterThan=r;
+		int lessThan = p;
+		int greaterThan = r;
 		int i = p;
 		int pivot = inputArray[r];
 		while (i <= greaterThan) {
@@ -108,9 +137,8 @@ public class Algorithms {
 			int[] pivotPoints = partitionThreeWay(inputArray, p, r);
 			int startPivot = pivotPoints[0];
 			int endPivot = pivotPoints[1];
-			//System.out.println("start: " + startPivot + " end: " + endPivot);
-			quickSort(inputArray, 0, startPivot-1);
-			quickSort(inputArray, endPivot+1, r);
+			quickSortThreeWay(inputArray, 0, startPivot-1);
+			quickSortThreeWay(inputArray, endPivot+1, r);
 		}
 	}
 	
@@ -163,6 +191,16 @@ public class Algorithms {
 				j -= 1;
 			}
 			inputArray[j+1] = key;
+		}
+	}
+	
+	public static void mergeSort(int[] inputArray, int p, int r) {
+		int q;
+		if (p < r) {
+			q = (p + r) / 2;
+			mergeSort(inputArray, p, q);
+			mergeSort(inputArray, q+1, r);
+			merge(inputArray, p, q, r);
 		}
 	}
 }
