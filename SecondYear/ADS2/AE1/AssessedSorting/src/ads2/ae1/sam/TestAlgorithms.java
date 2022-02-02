@@ -25,12 +25,14 @@ public class TestAlgorithms {
 	}
 	
 	private static Path[] getPaths() {
-		Path path_10 = Paths.get("../int10.txt");
-		Path path_50 = Paths.get("../int50.txt");
-		Path path_100 = Paths.get("../int100.txt");
-		Path path_1000 = Paths.get("../int1000.txt");
-		Path path_20k = Paths.get("../int20k.txt");
-		//Path path_500k = Paths.get("int500k.txt");
+		Path path_10 = Paths.get("../DataSets/int10.txt");
+		Path path_50 = Paths.get("../DataSets/int50.txt");
+		Path path_100 = Paths.get("../DataSets/int100.txt");
+		Path path_1000 = Paths.get("../DataSets/int1000.txt");
+		Path path_20k = Paths.get("../DataSets/int20k.txt");
+		//Path path_500k = Paths.get("../DataSets/int500k.txt");
+		//Path path_big = Paths.get("../DataSets/intBig.txt");
+		//Path path_dutch = Paths.get("../DataSets/dutch.txt")
 		Path[] allPaths = {path_10, path_50, path_100, path_1000, path_20k};
 		return allPaths;
 	}
@@ -50,7 +52,7 @@ public class TestAlgorithms {
 		Path[] allPaths = getPaths();
 		for (Path path : allPaths) { 
 			int[] integerArray = readFile(path);
-			Algorithms.quickSort(integerArray, 0, integerArray.length - 1);
+			Algorithms.quickSortMedianOfThree(integerArray, 0, integerArray.length - 1);
 			if (!testIfSorted(integerArray))
 				return false;
 		}
@@ -59,12 +61,14 @@ public class TestAlgorithms {
 	
 	private static void testOneSort(Path path) throws IOException { 
 		int[] integerArray = readFile(path);
-		Algorithms.quickSortInsertion(integerArray, 0, integerArray.length-1, 4);
+		Algorithms.quickSortMedianOfThree(integerArray, 0, integerArray.length-1);
+		testIfSorted(integerArray);
 	}
 	
 	// Testing to make sure that everything is working
 	public static void main(String[] args) throws IOException {
-		Path path_10 = Paths.get("../int10.txt");
-		testOneSort(path_10);
+		Path path_10 = Paths.get("../DataSets/int10.txt");
+		//testOneSort(path_10);
+		testRunQuicksort();
 	}
 }

@@ -1,10 +1,12 @@
 package ads2.ae1.sam;
 
+import java.util.Arrays;
+
 public class Algorithms {
 	/* Algorithms to implement:
 	 * 
-	 * quickSort (primary, 3-way, median-of-three) 
-	 * insertionSort
+	 * quickSort (primary // DONE, insertion method // DONE,  3-way, median-of-three // DONE) 
+	 * insertionSort // DONE
 	 * mergeSort
 	 * Algorithm of O(n^2)
 	 */
@@ -34,7 +36,7 @@ public class Algorithms {
 	}
 	
 	// quickSort algorithms & helpers
-	private static int partitionRightMost(int[] inputArray, int p, int r) {
+	private static int partition(int[] inputArray, int p, int r) {
 		int pivot = inputArray[r];
 		int i = p-1;
 		for (int j=p; j < r; j++) {
@@ -47,31 +49,70 @@ public class Algorithms {
 		return i+1;
 	}
 	
-	private static int medianOfThree(int[] inputArray, int low, int high) {
+	
+	// Returning the start and end points of equal partitions
+	private static int[] partitionThreeWay(int[] inputArray, int p, int r) {
+		// Picking the pivot to be number at end of index
+		// Could even use median of three method here
+		int pivot = inputArray[r];
+		int i = p + 1;
+		
+		while (i < p) {
+			if (inputArray[i] > pivot) {
+				swap(inputArray, i, r--);
+			} else if (inputArray[i] < pivot) {
+				swap(inputArray, p++, i++);
+			} else {
+				i++;
+			}
+		}
+		return new int[] {p, r};
+	}
+	
+	private static void medianOfThree(int[] inputArray, int low, int high) {
+		// Need to find the median of three values.	
 		int mid = (high + low) / 2;
+		int[] medianArray = {inputArray[low], inputArray[mid], inputArray[high]};
 		
-		if (inputArray[low] > inputArray[mid])
-			swap(inputArray, low, mid);
-		if (inputArray[low] > inputArray[high])
-			swap(inputArray, low, high);
-		if (inputArray[mid] > inputArray[high])
-			swap(inputArray, mid, high);
+		// Sort using insertion (small array) and then pick middle integer.
+		insertionSort(medianArray);
+		int middleValue = medianArray[1];
 		
-		swap(inputArray, mid, high);
-		return inputArray[high];
+		// Placing median of three at the end
 		
+		int temp = inputArray[high];
+		inputArray[high] = middleValue;
+		if (middleValue == inputArray[low]) {
+			inputArray[low] = temp;
+		} else if (middleValue == inputArray[mid]) {
+			inputArray[mid] = temp;
+		}
+		
+		// This has now made the array pick a pivot that is, at the very least,
+		// not the smallest nor largest number.
 	}
 	
 	public static void quickSort(int[] inputArray, int p, int r) {
 		if (p < r) {
-			int q = partitionRightMost(inputArray, p, r);
+			int q = partition(inputArray, p, r);
 			quickSort(inputArray, p, q-1);
 			quickSort(inputArray, q+1, r);
 		}
 	}
 	
+	public static void quickSortThreeWay(int[] inputArray, int p, int r) {
+		if (p < r) {
+			// Going to need pivot, and all numbers equal to pivot.
+		}
+	}
+	
 	public static void quickSortMedianOfThree(int[] inputArray, int p, int r) {
-		
+		if (p < r) {
+			medianOfThree(inputArray, p, r);
+			int q = partition(inputArray, p, r);
+			quickSort(inputArray, p, q-1);
+			quickSort(inputArray, q+1, r);
+		}
 	}
 	
 	public static void quickSortInsertion(int[] inputArray, int p, int r, int k) {
@@ -84,7 +125,7 @@ public class Algorithms {
 		if ((r-p) < k)
 			return;
 		if (p < r) {
-			int q = partitionRightMost(inputArray, p, r);
+			int q = partition(inputArray, p, r);
 			quickSortInsertionSubarrays(inputArray, p, q-1, k);
 			quickSortInsertionSubarrays(inputArray, q+1, r, k);
 		}
