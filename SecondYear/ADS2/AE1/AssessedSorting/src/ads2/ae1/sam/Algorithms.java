@@ -56,6 +56,7 @@ public class Algorithms {
 		// Could even use median of three method here
 		int pivot = inputArray[r];
 		int i = p + 1;
+		int[] outputArray = new int[2];
 		
 		while (i < p) {
 			if (inputArray[i] > pivot) {
@@ -66,7 +67,9 @@ public class Algorithms {
 				i++;
 			}
 		}
-		return new int[] {p, r};
+		outputArray[0] = p;
+		outputArray[1] = r;
+		return outputArray;
 	}
 	
 	private static void medianOfThree(int[] inputArray, int low, int high) {
@@ -102,7 +105,15 @@ public class Algorithms {
 	
 	public static void quickSortThreeWay(int[] inputArray, int p, int r) {
 		if (p < r) {
-			// Going to need pivot, and all numbers equal to pivot.
+			// Use quicksort on two parts, parts less than pivot and greater than pivot
+			int[] pivots = partitionThreeWay(inputArray, p, r);
+			int startPivot = pivots[0];
+			int endPivot = pivots[1];
+			System.out.println("Start: " + startPivot + " End: " + endPivot);
+			// quickSort, before pivot
+			quickSortThreeWay(inputArray, 0, startPivot-1);
+			// quickSort, after pivot
+			quickSortThreeWay(inputArray, endPivot+1, r);
 		}
 	}
 	

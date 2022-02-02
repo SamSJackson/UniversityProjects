@@ -61,14 +61,16 @@ public class TestAlgorithms {
 	
 	private static void testOneSort(Path path) throws IOException { 
 		int[] integerArray = readFile(path);
-		Algorithms.quickSortMedianOfThree(integerArray, 0, integerArray.length-1);
+		Algorithms.printArray(integerArray);
+		Algorithms.quickSortThreeWay(integerArray, 0, integerArray.length-1);
 		testIfSorted(integerArray);
+		Algorithms.printArray(integerArray);
 	}
 	
 	// Testing to make sure that everything is working
 	public static void main(String[] args) throws IOException {
 		Path path_10 = Paths.get("../DataSets/int10.txt");
-		//testOneSort(path_10);
-		testRunQuicksort();
+		testOneSort(path_10);
+		//testRunQuicksort();
 	}
 }
