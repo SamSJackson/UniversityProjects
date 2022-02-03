@@ -40,11 +40,11 @@ public class TestAlgorithms {
 	public static boolean testIfSorted(int[] inputArray) {
 		for (int i=1; i < inputArray.length; i++) {
 			if (inputArray[i] < inputArray[i-1]) {
-				consoleOutput("false");
+				//consoleOutput("false");
 				return false;
 			}
 		}
-		consoleOutput("true");
+		//consoleOutput("true");
 		return true;
 	}
 	
@@ -52,21 +52,24 @@ public class TestAlgorithms {
 		Path[] allPaths = getPaths();
 		for (Path path : allPaths) {
 			int[] integerArray = readFile(path);
-			consoleOutput("Current size: " + integerArray.length);
-			Algorithms.quickSortThreeWay(integerArray, 0, integerArray.length-1);
-			//TimeSortingAlgorithms.compareQuickSortAlgorithms(integerArray, 1000);
-			if (!testIfSorted(integerArray))
+			//consoleOutput("Current size: " + integerArray.length);
+			//Algorithms.quickSortInsertion(integerArray, 0, integerArray.length-1, 5);
+			TimeSortingAlgorithms.compareAlgorithms(integerArray, 10);
+			/*
+			if (!testIfSorted(integerArray)) {
+				consoleOutput("FAILED");
 				return false;
-			//consoleOutput("");
+			}
+			*/
 		}
-		consoleOutput("DONE");
 		return true;
 	}
 	
 	private static void testOneSort(Path path) throws IOException { 
 		int[] integerArray = readFile(path);
 		//Algorithms.printArray(integerArray);
-		Algorithms.quickSortThreeWay(integerArray, 0, integerArray.length-1);
+		consoleOutput("ongoing");
+		Algorithms.quickSortInsertion(integerArray, 0, integerArray.length-1, 5);
 		testIfSorted(integerArray);
 		//Algorithms.printArray(integerArray);
 	}
@@ -74,7 +77,11 @@ public class TestAlgorithms {
 	// Testing to make sure that everything is working
 	public static void main(String[] args) throws IOException {
 		Path path_10 = Paths.get("../DataSets/int10.txt");
-		//testOneSort(path_10);
+		Path path_20k = Paths.get("../DataSets/int20k.txt");
+		Path path_1000 = Paths.get("../DataSets/int1000.txt");
+		Path path_100 = Paths.get("../DataSets/int100.txt");
+		//testOneSort(path_1000);
 		testRunQuicksort();
+		consoleOutput("DONE FINALLY");
 	}
 }

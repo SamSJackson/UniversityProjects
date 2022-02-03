@@ -78,7 +78,6 @@ public class Algorithms {
 		return i+1;
 	}
 	
-	
 	// Returning the indices of the subarray of equal pivots
 	private static int[] partitionThreeWay(int[] inputArray, int p, int r) {
 		// Want to return the indices of the subarray of equal pivots
@@ -137,7 +136,7 @@ public class Algorithms {
 			int[] pivotPoints = partitionThreeWay(inputArray, p, r);
 			int startPivot = pivotPoints[0];
 			int endPivot = pivotPoints[1];
-			quickSortThreeWay(inputArray, 0, startPivot-1);
+			quickSortThreeWay(inputArray, p, startPivot-1);
 			quickSortThreeWay(inputArray, endPivot+1, r);
 		}
 	}
