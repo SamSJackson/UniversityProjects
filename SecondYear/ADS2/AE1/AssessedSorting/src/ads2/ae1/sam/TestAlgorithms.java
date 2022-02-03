@@ -54,7 +54,7 @@ public class TestAlgorithms {
 			int[] integerArray = readFile(path);
 			//consoleOutput("Current size: " + integerArray.length);
 			//Algorithms.quickSortInsertion(integerArray, 0, integerArray.length-1, 5);
-			TimeSortingAlgorithms.compareAlgorithms(integerArray, 10);
+			TimeSortingAlgorithms.compareAlgorithms(integerArray, 10, 5);
 			/*
 			if (!testIfSorted(integerArray)) {
 				consoleOutput("FAILED");
