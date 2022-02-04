@@ -15,6 +15,15 @@ public class TimeSortingAlgorithms {
 		return outputResult;
 	}
 	
+	private static boolean check(boolean test) {
+		if (test) { 
+			return true;
+		} else {
+			System.out.println("NOT SORTED");
+			return false;
+		}
+	}
+	
 	private static long runInsertion(int[] inputArray, int numberOfRuns) {
 		long[] standardInsertionSortTimings = new long[numberOfRuns];
 		long standardInsertionTime, time;
@@ -24,6 +33,9 @@ public class TimeSortingAlgorithms {
 			time = System.currentTimeMillis();
 			Algorithms.insertionSort(unsortedArray, 0, inputArray.length-1);
 			standardInsertionTime = System.currentTimeMillis() - time;
+			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
+				break;
+			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
 			standardInsertionSortTimings[i] = standardInsertionTime; 
@@ -40,6 +52,9 @@ public class TimeSortingAlgorithms {
 			time = System.currentTimeMillis();
 			Algorithms.mergeSort(unsortedArray, 0, inputArray.length-1);
 			standardMergeTime = System.currentTimeMillis() - time;
+			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
+				break;
+			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
 			standardMergeSortTimings[i] = standardMergeTime; 
@@ -56,6 +71,9 @@ public class TimeSortingAlgorithms {
 			time = System.currentTimeMillis();
 			Algorithms.quickSort(unsortedArray, 0, inputArray.length-1);
 			standardQuicksortTime = System.currentTimeMillis() - time;
+			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
+				break;
+			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
 			standardQuicksortSortTimings[i] = standardQuicksortTime; 
@@ -72,6 +90,9 @@ public class TimeSortingAlgorithms {
 			time = System.currentTimeMillis();
 			Algorithms.quickSortInsertion(unsortedArray, 0, inputArray.length-1, k);
 			standardQuicksortInsertionTime = System.currentTimeMillis() - time;
+			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
+				break;
+			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
 			standardQuicksortInsertionSortTimings[i] = standardQuicksortInsertionTime; 
@@ -88,6 +109,9 @@ public class TimeSortingAlgorithms {
 			time = System.currentTimeMillis();
 			Algorithms.quickSortMedianOfThree(unsortedArray, 0, inputArray.length-1);
 			standardQuicksortMedianTime = System.currentTimeMillis() - time;
+			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
+				break;
+			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
 			standardQuicksortMedianSortTimings[i] = standardQuicksortMedianTime; 
@@ -104,6 +128,9 @@ public class TimeSortingAlgorithms {
 			time = System.currentTimeMillis();
 			Algorithms.quickSortThreeWay(unsortedArray, 0, inputArray.length-1);
 			standardQuicksortThreeWayTime = System.currentTimeMillis() - time;
+			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
+				break;
+			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
 			standardQuicksortThreeWaySortTimings[i] = standardQuicksortThreeWayTime; 
@@ -121,11 +148,11 @@ public class TimeSortingAlgorithms {
 		insertionQuicksortAverage = runQuicksortInsertion(inputArray, numberOfRuns, k);
 		medianQuicksortAverage = runQuicksortMedian(inputArray, numberOfRuns);
 		threeWayQuicksortAverage = runQuicksortThreeWay(inputArray, numberOfRuns);
-		insertionSortAverage = runInsertion(inputArray, numberOfRuns);
+		//insertionSortAverage = runInsertion(inputArray, numberOfRuns);
 		mergeSortAverage = runMerge(inputArray, numberOfRuns);
 		
 		System.out.println("Size: " + inputArray.length);
-		System.out.println("Standard Insertion Sort: " + insertionSortAverage + "ms");
+		//System.out.println("Standard Insertion Sort: " + insertionSortAverage + "ms");
 		System.out.println("Standard Merge Sort: " + mergeSortAverage + "ms");
 		System.out.println("Standard Quicksort: " + standardQuicksortAverage + "ms");
 		System.out.println("Insertion Quicksort (k=" + k + ") :" + insertionQuicksortAverage + "ms");
