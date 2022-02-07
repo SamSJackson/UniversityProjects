@@ -1,9 +1,12 @@
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class GenerateInput {
 	
+	
+	static Scanner readInput = new Scanner(System.in);
 	// Class that is created in order 
 	// to define an algorithm that will generate inputs that will cause 
 	// Median of three quicksort to run worst case.
@@ -31,6 +34,7 @@ public class GenerateInput {
 	public static void generateOutput(int numberOfElements, String filename) throws IOException {
 		while (!makeFile(filename)) {
 			System.out.println("Please make sure to pick an available name.");
+			filename = readInput.nextLine() + ".txt";
 		}
 		try {
 			FileWriter writeToFile = new FileWriter(filename);
@@ -43,6 +47,6 @@ public class GenerateInput {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		generateOutput(3, "newfile.txt");
+		generateOutput(3, "textfile.txt");
 	}
 }
