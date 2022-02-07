@@ -54,14 +54,14 @@ public class TestAlgorithms {
 		return true;
 	}
 	
-	private static boolean testRunQuicksort(int numberOfRuns) throws IOException, InterruptedException, IllegalArgumentException {
-		if (numberOfRuns < 1) {
-			throw new IllegalArgumentException("Must be positive number of runs");
+	private static boolean testRunSorting(int numberOfRuns, int subarraySize) throws IOException, InterruptedException, IllegalArgumentException {
+		if (numberOfRuns < 1 || subarraySize < 1) {
+			throw new IllegalArgumentException("Must be positive number of runs and subarray size");
 		}
 		Path[] allPaths = getPaths();
 		for (Path path : allPaths) {
 			int[] integerArray = readFile(path);
-			TimeSortingAlgorithms.compareAlgorithms(integerArray, numberOfRuns, 5);
+			TimeSortingAlgorithms.compareAlgorithms(integerArray, numberOfRuns, subarraySize);
 		}
 		return true;
 	}
@@ -118,6 +118,8 @@ public class TestAlgorithms {
 		// sorted = testQuicksortThreeWayPartition(allPaths[0]);
 		// sorted = testInsertion(allPaths[0]);
 		// sorted = testMerge(allPaths[0]);
+		
+		/* Uncomment to see if individual arrays are sorting */
 		//consoleOutput(sorted);
 		
 		
@@ -125,9 +127,9 @@ public class TestAlgorithms {
 		// Comment in insertion-sort with line 124 in TimeSortingAlgorithm
 		
 		try {
-			// Parameter is the number of runs 
+			// Parameter is the number of runs and subarrays for insertion-quicksort 
 			// Higher number will take longer, but more accurate.
-			testRunQuicksort(100);
+			testRunSorting(100, 10);
 		} catch (IOException | InterruptedException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}
