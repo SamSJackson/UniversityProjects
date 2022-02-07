@@ -24,7 +24,7 @@ public class TimeSortingAlgorithms {
 		}
 	}
 	
-	private static long runInsertion(int[] inputArray, int numberOfRuns) {
+	private static long runInsertion(int[] inputArray, int numberOfRuns) throws InterruptedException {
 		long[] standardInsertionSortTimings = new long[numberOfRuns];
 		long standardInsertionTime, time;
 		
@@ -34,7 +34,7 @@ public class TimeSortingAlgorithms {
 			Algorithms.insertionSort(unsortedArray, 0, inputArray.length-1);
 			standardInsertionTime = System.currentTimeMillis() - time;
 			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
-				break;
+				throw new InterruptedException("Array not sorted: Insertion Sort");
 			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
@@ -43,7 +43,7 @@ public class TimeSortingAlgorithms {
 		return meanAverage(standardInsertionSortTimings);
 	}
 	
-	private static long runMerge(int[] inputArray, int numberOfRuns) {
+	private static long runMerge(int[] inputArray, int numberOfRuns) throws InterruptedException {
 		long[] standardMergeSortTimings = new long[numberOfRuns];
 		long standardMergeTime, time;
 		
@@ -53,7 +53,7 @@ public class TimeSortingAlgorithms {
 			Algorithms.mergeSort(unsortedArray, 0, inputArray.length-1);
 			standardMergeTime = System.currentTimeMillis() - time;
 			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
-				break;
+				throw new InterruptedException("Array not sorted: Merge sort");
 			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
@@ -62,7 +62,7 @@ public class TimeSortingAlgorithms {
 		return meanAverage(standardMergeSortTimings);
 	}
 	
-	private static long runStandardQuicksort(int[] inputArray, int numberOfRuns) {
+	private static long runStandardQuicksort(int[] inputArray, int numberOfRuns) throws InterruptedException {
 		long[] standardQuicksortSortTimings = new long[numberOfRuns];
 		long standardQuicksortTime, time;
 		
@@ -72,7 +72,7 @@ public class TimeSortingAlgorithms {
 			Algorithms.quickSort(unsortedArray, 0, inputArray.length-1);
 			standardQuicksortTime = System.currentTimeMillis() - time;
 			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
-				break;
+				throw new InterruptedException("Array not sorted: Standard Quicksort");
 			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
@@ -81,7 +81,7 @@ public class TimeSortingAlgorithms {
 		return meanAverage(standardQuicksortSortTimings);
 	}
 	
-	private static long runQuicksortInsertion(int[] inputArray, int numberOfRuns, int k) {
+	private static long runQuicksortInsertion(int[] inputArray, int numberOfRuns, int k) throws InterruptedException {
 		long[] standardQuicksortInsertionSortTimings = new long[numberOfRuns];
 		long standardQuicksortInsertionTime, time;
 		
@@ -91,7 +91,7 @@ public class TimeSortingAlgorithms {
 			Algorithms.quickSortInsertion(unsortedArray, 0, inputArray.length-1, k);
 			standardQuicksortInsertionTime = System.currentTimeMillis() - time;
 			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
-				break;
+				throw new InterruptedException("Array not sorted: Quicksort-Insertion");
 			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
@@ -100,7 +100,7 @@ public class TimeSortingAlgorithms {
 		return meanAverage(standardQuicksortInsertionSortTimings);
 	}
 	
-	private static long runQuicksortMedian(int[] inputArray, int numberOfRuns) {
+	private static long runQuicksortMedian(int[] inputArray, int numberOfRuns) throws InterruptedException {
 		long[] standardQuicksortMedianSortTimings = new long[numberOfRuns];
 		long standardQuicksortMedianTime, time;
 		
@@ -110,7 +110,7 @@ public class TimeSortingAlgorithms {
 			Algorithms.quickSortMedianOfThree(unsortedArray, 0, inputArray.length-1);
 			standardQuicksortMedianTime = System.currentTimeMillis() - time;
 			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
-				break;
+				throw new InterruptedException("Array not sorted: Quicksort Median-of-Three");
 			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
@@ -119,7 +119,7 @@ public class TimeSortingAlgorithms {
 		return meanAverage(standardQuicksortMedianSortTimings);
 	}
 	
-	private static long runQuicksortThreeWay(int[] inputArray, int numberOfRuns) {
+	private static long runQuicksortThreeWay(int[] inputArray, int numberOfRuns) throws InterruptedException {
 		long[] standardQuicksortThreeWaySortTimings = new long[numberOfRuns];
 		long standardQuicksortThreeWayTime, time;
 		
@@ -129,7 +129,7 @@ public class TimeSortingAlgorithms {
 			Algorithms.quickSortThreeWay(unsortedArray, 0, inputArray.length-1);
 			standardQuicksortThreeWayTime = System.currentTimeMillis() - time;
 			if (!check(TestAlgorithms.testIfSorted(unsortedArray))) {
-				break;
+				throw new InterruptedException("Array not sorted: Three-Way Quicksort");
 			}
 			unsortedArray = Arrays.copyOf(inputArray, inputArray.length);
 			
@@ -139,23 +139,27 @@ public class TimeSortingAlgorithms {
 	}
 	
 	
-	public static void compareAlgorithms(int[] inputArray, int numberOfRuns, int k) {
-		long standardQuicksortAverage, insertionQuicksortAverage;
-		long medianQuicksortAverage, threeWayQuicksortAverage;
-		long insertionSortAverage, mergeSortAverage;
+	public static void compareAlgorithms(int[] inputArray, int numberOfRuns, int k) throws InterruptedException {
+		long standardQuicksortAverage=-1, insertionQuicksortAverage=-1;
+		long medianQuicksortAverage=-1, threeWayQuicksortAverage=-1;
+		long insertionSortAverage=-1, mergeSortAverage=-1;
 
-		standardQuicksortAverage = runStandardQuicksort(inputArray, numberOfRuns);
-		insertionQuicksortAverage = runQuicksortInsertion(inputArray, numberOfRuns, k);
-		medianQuicksortAverage = runQuicksortMedian(inputArray, numberOfRuns);
-		threeWayQuicksortAverage = runQuicksortThreeWay(inputArray, numberOfRuns);
-		//insertionSortAverage = runInsertion(inputArray, numberOfRuns);
-		mergeSortAverage = runMerge(inputArray, numberOfRuns);
+		try {
+			standardQuicksortAverage = runStandardQuicksort(inputArray, numberOfRuns);
+			insertionQuicksortAverage = runQuicksortInsertion(inputArray, numberOfRuns, k);
+			medianQuicksortAverage = runQuicksortMedian(inputArray, numberOfRuns);
+			threeWayQuicksortAverage = runQuicksortThreeWay(inputArray, numberOfRuns);
+			//insertionSortAverage = runInsertion(inputArray, numberOfRuns);
+			mergeSortAverage = runMerge(inputArray, numberOfRuns);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		
 		System.out.println("Size: " + inputArray.length);
-		//System.out.println("Standard Insertion Sort: " + insertionSortAverage + "ms");
+		System.out.println("Standard Insertion Sort: " + insertionSortAverage + "ms");
 		System.out.println("Standard Merge Sort: " + mergeSortAverage + "ms");
 		System.out.println("Standard Quicksort: " + standardQuicksortAverage + "ms");
-		System.out.println("Insertion Quicksort (k=" + k + ") :" + insertionQuicksortAverage + "ms");
+		System.out.println("Insertion Quicksort (k=" + k + "): " + insertionQuicksortAverage + "ms");
 		System.out.println("Median Quicksort: " + medianQuicksortAverage + "ms");
 		System.out.println("3-Way Partition Quicksort: " + threeWayQuicksortAverage + "ms");
 		System.out.println("----------------------------------------------------");
