@@ -24,6 +24,23 @@ public class TimeSortingAlgorithms {
 		}
 	}
 	
+	public static long timeArray(int[] inputArray, int numberOfRuns) {
+		long[] times = new long[numberOfRuns];
+		long averageTime, time, newTime;
+		
+		int[] copiedArray = Arrays.copyOf(inputArray, inputArray.length);
+		
+		for (int i=0; i < numberOfRuns; i++) {
+			time = System.nanoTime();
+			Algorithms.quickSortMedianOfThree(inputArray, 0, inputArray.length-1);
+			times[i] = System.nanoTime() - time;
+			copiedArray = Arrays.copyOf(inputArray, inputArray.length);
+		}
+		averageTime = meanAverage(times);
+		return averageTime;
+	}
+
+	
 	private static long runInsertion(int[] inputArray, int numberOfRuns) throws InterruptedException {
 		long[] standardInsertionSortTimings = new long[numberOfRuns];
 		long standardInsertionTime, time;

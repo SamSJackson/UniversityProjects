@@ -145,8 +145,8 @@ public class Algorithms {
 		if (p < r) {
 			medianOfThree(inputArray, p, r);
 			int q = partition(inputArray, p, r);
-			quickSort(inputArray, p, q-1);
-			quickSort(inputArray, q+1, r);
+			quickSortMedianOfThree(inputArray, p, q-1);
+			quickSortMedianOfThree(inputArray, q+1, r);
 		}
 	}
 	

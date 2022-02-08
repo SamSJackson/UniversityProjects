@@ -21,7 +21,7 @@ public class TestAlgorithms {
 	}
 	
 	// Helper functions
-	private static int[] readFile(Path path) throws IOException {
+	public static int[] readFile(Path path) throws IOException {
 		List<String> allLines = Files.readAllLines(path);
 		int[] outputList = new int[allLines.size()];
 		int i = 0;
