@@ -134,5 +134,6 @@ public class TestAlgorithms {
 			e.printStackTrace();
 		}
 		consoleOutput("Finished all testing.");
+		
 	}
 }

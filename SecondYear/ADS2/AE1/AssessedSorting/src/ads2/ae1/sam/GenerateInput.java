@@ -57,7 +57,6 @@ public class GenerateInput {
 		try {
 			FileWriter writeToFile = new FileWriter(filename);
 			int[] arrayToWrite = createArray(numberOfElements);
-			System.out.println(arrayToWrite.length);
 			for (int i=0; i < numberOfElements; i++) {
 				if (i == numberOfElements-1) {
 					writeToFile.write(arrayToWrite[i] + "");
@@ -75,21 +74,30 @@ public class GenerateInput {
 	public static void main(String[] args) throws IOException {
 		long averageTimeSlow = -1, averageTimeStandard = -1;
 		
+		/* TO CREATE TEXT FILE AND PATH */
+		// generateOutput("insertName.txt");
+		// Path path_insertName = Paths.get("insertName.txt");
+		
+		
+		// May not have int30k and int40k, but submitted with files if want to test
 		Path path_20k = Paths.get("int20k.txt");
-		Path path_30k = Paths.get("int30k.txt");
-		Path path_40k = Paths.get("int40k.txt");
+		//Path path_30k = Paths.get("int30k.txt");
+		// Path path_40k = Paths.get("int40k.txt");
 		Path path_1000 = Paths.get("int1000.txt");
+		
+		// Pick array size for 'massiveInput' and align with 'integerArray'
 		int[] massiveInput = createArray(20000);
+		// Only four options really, anything us will crash.
+		// Any of the path options, pass them as parameters.
+		// Then run the remaining.
 		int[] integerArray = TestAlgorithms.readFile(path_20k);
 			
+		
+		// Can improve the accuracy by running the tests more times (second parameter in timeArray)
 		System.out.println("Size: " + massiveInput.length);
-		averageTimeSlow = TimeSortingAlgorithms.timeArray(massiveInput, 10);
 		averageTimeStandard = TimeSortingAlgorithms.timeArray(integerArray, 10);
-		System.out.println("Standard array: " + averageTimeStandard + "ns");
-		System.out.println("Slow array: " + averageTimeSlow + "ns");
-		
-		
-		
-
+		averageTimeSlow = TimeSortingAlgorithms.timeArray(massiveInput, 10);
+		System.out.println("Standard array: " + averageTimeStandard + " ns");
+		System.out.println("Slow array: " + averageTimeSlow + " ns");
 	}
 }
