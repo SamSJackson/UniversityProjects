@@ -1,3 +1,4 @@
+package ads2.ae1.sam;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,10 +6,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Scanner;
-
-import ads2.ae1.sam.Algorithms;
-import ads2.ae1.sam.TestAlgorithms;
-import ads2.ae1.sam.TimeSortingAlgorithms;
 
 public class GenerateInput {
 	
@@ -78,20 +75,16 @@ public class GenerateInput {
 	public static void main(String[] args) throws IOException {
 		long averageTimeSlow = -1, averageTimeStandard = -1;
 		
-		
 		Path path_20k = Paths.get("int20k.txt");
+		Path path_30k = Paths.get("int30k.txt");
+		Path path_40k = Paths.get("int40k.txt");
 		Path path_1000 = Paths.get("int1000.txt");
-		Path path_500k = Paths.get("int500k.txt");
-		Path path_100k = Paths.get("int100k.txt");
-		Path path_50k = Paths.get("int50k.txt");
 		int[] massiveInput = createArray(20000);
 		int[] integerArray = TestAlgorithms.readFile(path_20k);
-		
-		
+			
 		System.out.println("Size: " + massiveInput.length);
-		averageTimeStandard = TimeSortingAlgorithms.timeArray(integerArray, 100);
-		averageTimeSlow = TimeSortingAlgorithms.timeArray(massiveInput, 100);
-		System.out.println("DONE STANDARD");
+		averageTimeSlow = TimeSortingAlgorithms.timeArray(massiveInput, 10);
+		averageTimeStandard = TimeSortingAlgorithms.timeArray(integerArray, 10);
 		System.out.println("Standard array: " + averageTimeStandard + "ns");
 		System.out.println("Slow array: " + averageTimeSlow + "ns");
 		

@@ -8,7 +8,7 @@ public class Algorithms {
 	 * quickSort (primary // DONE, insertion method // DONE,  3-way, median-of-three // DONE) 
 	 * insertionSort // DONE
 	 * mergeSort // DONE
-	 * Algorithm of O(n^2)
+	 * Algorithm of O(n^2) // DONE IN GenerateInput.java
 	 */
 	
 	// Print functions

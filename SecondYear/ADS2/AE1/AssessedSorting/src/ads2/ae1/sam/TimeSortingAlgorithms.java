@@ -31,9 +31,9 @@ public class TimeSortingAlgorithms {
 		int[] copiedArray = Arrays.copyOf(inputArray, inputArray.length);
 		
 		for (int i=0; i < numberOfRuns; i++) {
-			time = System.nanoTime();
+			time = System.currentTimeMillis();
 			Algorithms.quickSortMedianOfThree(inputArray, 0, inputArray.length-1);
-			times[i] = System.nanoTime() - time;
+			times[i] = System.currentTimeMillis() - time;
 			copiedArray = Arrays.copyOf(inputArray, inputArray.length);
 		}
 		averageTime = meanAverage(times);
