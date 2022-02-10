@@ -1,0 +1,40 @@
+State is X
+Covariance is P 
+H is measurement matrix
+Measurement = Sensor data = SD 
+
+
+We have constants Q, R_ACC, R_ALT, Q_Q, Gyro.
+
+Things we need to measure
+
+F [3x3], selection matrix with respect to time (just some maths magic)
+calculateF is the function
+
+Prediction step, returns new state (X) and covariance (P) estimates
+Parameters are previous state, previous covariance.
+
+Correction step, returns corrected state and corrected estimate
+Parameters are current state estimate and current covariance estimate, measurements (sensor data), H (measurement 2x3)
+K is Kalman gain
+if have both data
+kalmainGain = P_k * H^t * (H*P_k*H^t + R[all, some may be 0])^-1
+actualState = currentStateEstimate + K(y_k - h(currentStateEstimate))
+actualCovariance = (id(3) - kalmainGain*H)*covarianceEstimate # *(id(3) - kalmainGain*H)^t + kalmainGain * R * kalmainGain^t
+
+
+P_k = prediction covariance estimate
+X_k = prediction state estimate
+actualP = covariance
+actualX = state
+mainLoop(SD):
+	if two element in SD:
+		H = [2x3]
+		fusedP, fusedX = correction(X_k, P_k, SD, H)
+	if one element in SD:
+		H = [1x3]
+		fusedP, fusedX = correction(X_k, P_k, SD, H)
+	else:
+		P_k, X_k = prediction(fusedP, fusedX)
+
+
