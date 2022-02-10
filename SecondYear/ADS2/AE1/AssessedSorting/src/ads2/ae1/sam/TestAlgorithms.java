@@ -129,7 +129,7 @@ public class TestAlgorithms {
 		try {
 			// Parameter is the number of runs and subarrays for insertion-quicksort 
 			// Higher number will take longer, but more accurate.
-			testRunSorting(100, 10);
+			testRunSorting(20, 30);
 		} catch (IOException | InterruptedException | IllegalArgumentException e) {
 			e.printStackTrace();
 		}

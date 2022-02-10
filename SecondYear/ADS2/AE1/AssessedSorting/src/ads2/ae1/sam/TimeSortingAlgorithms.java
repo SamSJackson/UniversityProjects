@@ -40,6 +40,12 @@ public class TimeSortingAlgorithms {
 		return averageTime;
 	}
 
+	/*
+	 * All of these are the same.
+	 * Creates an array of all run times
+	 * Each run is then completed, indexed into array of all runs
+	 * Mean average of all runs then found, returned as run time value
+	 */
 	
 	private static long runInsertion(int[] inputArray, int numberOfRuns) throws InterruptedException {
 		long[] standardInsertionSortTimings = new long[numberOfRuns];

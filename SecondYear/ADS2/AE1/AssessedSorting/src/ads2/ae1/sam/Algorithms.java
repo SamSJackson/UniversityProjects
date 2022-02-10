@@ -3,13 +3,6 @@ package ads2.ae1.sam;
 import java.util.Arrays;
 
 public class Algorithms {
-	/* Algorithms to implement:
-	 * 
-	 * quickSort (primary // DONE, insertion method // DONE,  3-way, median-of-three // DONE) 
-	 * insertionSort // DONE
-	 * mergeSort // DONE
-	 * Algorithm of O(n^2) // DONE IN GenerateInput.java
-	 */
 	
 	// Print functions
 	public static void printArray(int[] inputArray) {
@@ -36,7 +29,9 @@ public class Algorithms {
 	}
 	
 	private static void merge(int[] inputArray, int p, int q, int r) {
+		// Number of elements before q
 		int n_1 = q - p + 1;
+		// Number of elements after q
 		int n_2 = r - q;
 		int[] L = new int[n_1+1];
 		
@@ -51,6 +46,8 @@ public class Algorithms {
 			R[i] = inputArray[q + i + 1];
 		}
 		
+		// Max value, which values will always be less than, could pick any massive value but 
+		// Int.Max is literally the safest bet, since int cannot be greater than int max.
 		L[n_1] = Integer.MAX_VALUE;
 		R[n_2] = Integer.MAX_VALUE;
 		int i = 0;
@@ -97,6 +94,8 @@ public class Algorithms {
 				i++;
 			}
 		}
+		// lessThan is lower end partition index
+		// greaterThan is upper end partition index
 		return new int[] {lessThan, greaterThan};
 	}
 	
@@ -166,7 +165,7 @@ public class Algorithms {
 		}
 	}
 	
-	// insertion algorithm
+	// Insertion sort for partial array, if desired
 	public static void insertionSort(int[] inputArray, int p, int r) {
 		int j, key;
 		for (int i=p+1; i <= r; i++) {
@@ -180,6 +179,7 @@ public class Algorithms {
 		}
 	}
 	
+	// Insertion sort for whole array
 	public static void insertionSort(int[] inputArray) {
 		int j, key;
 		for (int i=1; i < inputArray.length; i++) {
