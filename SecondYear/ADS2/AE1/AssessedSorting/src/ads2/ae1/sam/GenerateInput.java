@@ -5,12 +5,14 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 public class GenerateInput {
 	
 	
 	static Scanner readInput = new Scanner(System.in);
+	static Random rand = new Random();
 	// Class that is created in order 
 	// to define an algorithm that will generate inputs that will cause 
 	// Median of three quicksort to run worst case.
@@ -32,6 +34,17 @@ public class GenerateInput {
 			ioException.printStackTrace();
 		}
 		return false;
+	}
+	
+	private static int[] createRandomArray(int numberOfElements) {
+		if (numberOfElements < 0) {
+			throw new IllegalArgumentException("Must be a positive number of elements");
+		}
+		int[] outputArray = new int[numberOfElements];
+		for (int i=0; i < numberOfElements; i++) {
+			outputArray[i] = rand.nextInt(numberOfElements);
+		}
+		return outputArray;
 	}
 	
 	private static int[] createArray(int numberOfElements) { 
@@ -79,9 +92,10 @@ public class GenerateInput {
 		// Path path_insertName = Paths.get("insertName.txt");
 		
 		
-		// May not have int30k and int40k, but submitted with files if want to test
+		// May not have int30k and int40k, was going to submit with files, but txt files not accepted.
+		// So I made a function to return random arrays of desired size
 		Path path_20k = Paths.get("int20k.txt");
-		//Path path_30k = Paths.get("int30k.txt");
+		// Path path_30k = Paths.get("int30k.txt");
 		// Path path_40k = Paths.get("int40k.txt");
 		Path path_1000 = Paths.get("int1000.txt");
 		
@@ -91,6 +105,8 @@ public class GenerateInput {
 		// Any of the path options, pass them as parameters.
 		// Then run the remaining.
 		int[] integerArray = TestAlgorithms.readFile(path_20k);
+		// int[] integerArray = createRandomArray(30000);
+		// int[] integerArray = createRandomArray(40000);
 			
 		
 		// Can improve the accuracy by running the tests more times (second parameter in timeArray)
