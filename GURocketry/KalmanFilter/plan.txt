@@ -11,11 +11,13 @@ Things we need to measure
 F [3x3], selection matrix with respect to time (just some maths magic)
 calculateF is the function
 
-Prediction step, returns new state (X) and covariance (P) estimates
-Parameters are previous state, previous covariance.
+
+Prediction step, returns new state estimate (X) and covariance (P) estimates
+Parameters are previous state, previous covariance, F.
+
 
 Correction step, returns corrected state and corrected estimate
-Parameters are current state estimate and current covariance estimate, measurements (sensor data), H (measurement 2x3)
+Parameters are available state and available covariance, measurements (sensor data), H (measurement), 2x3, F)
 K is Kalman gain
 if have both data
 kalmainGain = P_k * H^t * (H*P_k*H^t + R[all, some may be 0])^-1
@@ -30,10 +32,10 @@ actualX = state
 mainLoop(SD):
 	if two element in SD:
 		H = [2x3]
-		fusedP, fusedX = correction(X_k, P_k, SD, H)
+		P, X = correction(X_k, P_k, SD, H)
 	if one element in SD:
 		H = [1x3]
-		fusedP, fusedX = correction(X_k, P_k, SD, H)
+		P, X = correction(X_k, P_k, SD, H)
 	else:
 		P_k, X_k = prediction(fusedP, fusedX)
 

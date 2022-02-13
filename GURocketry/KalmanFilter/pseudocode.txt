@@ -5,8 +5,8 @@ Measurement [2x1]  // The sensor data
 H [2x3]       // Measurement matrix (which measurements we have, 1s and 0s)
 H = [1 0 0]
     [0 0 1]
-GYRO [3x1]    //roll-pitch-yaw measurements
-q [4x1]       // orientation
+#GYRO [3x1]    //roll-pitch-yaw measurements
+#q [3x1]       // orientation
 
 CONSTANT Q_Q [4x4]
 CONSTANT Q [3x3]             
@@ -39,8 +39,8 @@ method calcF(time_since_last_call):
 
 
 // calculate the quaterions (orientation of the rocket)
-method calcQuaternions(q, GYRO):
-    return q + dt * GYRO
+#method calcQuaternions(q, GYRO):
+#    return q + dt * GYRO
 
 
 method mainLoop(Measurement):

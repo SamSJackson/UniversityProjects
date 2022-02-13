@@ -4,10 +4,19 @@
 
 #include <Matrix.h>
 
-class KalmanMath {
-	static const Matrix Q_Q;
-	static const Matrix Q;
-	static const long R_ACC;
-	static const long R_ALT;
+typedef struct StateAndCovariance {
+	float state;
+	float covariance;
+} StateAndCovariance;
 
+
+class KalmanMath {
+	
+public:
+
+	Matrix& calculateF(time_difference);
+	StateAndCovariance& correction(StateAndCovariance previous, Matrix F, Matrix measurements, Matrix H);
+	StateAndCovariance& prediction(StateAndCovariance previous, Matrix F);
+	void kalmanLoop(Matrix sensorData);
+	
 };
