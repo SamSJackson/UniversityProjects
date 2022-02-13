@@ -7,6 +7,7 @@ H = [1 0 0]
     [0 0 1]
 #GYRO [3x1]    //roll-pitch-yaw measurements
 #q [3x1]       // orientation
+R [2x2]
 
 CONSTANT Q_Q [4x4]
 CONSTANT Q [3x3]             

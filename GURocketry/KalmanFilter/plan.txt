@@ -2,7 +2,7 @@ State is X
 Covariance is P 
 H is measurement matrix
 Measurement = Sensor data = SD 
-
+R is 2x2 matrix
 
 We have constants Q, R_ACC, R_ALT, Q_Q, Gyro.
 
@@ -17,7 +17,7 @@ Parameters are previous state, previous covariance, F.
 
 
 Correction step, returns corrected state and corrected estimate
-Parameters are available state and available covariance, measurements (sensor data), H (measurement), 2x3, F)
+Parameters are available state and available covariance, sensor data, H (measurement), 2x3, R)
 K is Kalman gain
 if have both data
 kalmainGain = P_k * H^t * (H*P_k*H^t + R[all, some may be 0])^-1
