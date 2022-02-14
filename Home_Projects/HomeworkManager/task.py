@@ -1,6 +1,6 @@
 import datetime
 
-class Homework:
+class Task:
 
 	def __init__(self, course : str, due : datetime, task : str):
 		self._course = course

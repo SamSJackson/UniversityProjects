@@ -11,14 +11,13 @@ class FileWriter:
 			self.createAndOpenFile(self._filename)
 
 	def createAndOpenFile(self, filename) -> None:
-		self._f = open(f"Databases/{filename}", "x+")
-		print(f"Created and opened {self._filename}")
-		return 
+		self._file = open(f"Databases/{filename}", "x+")
+		return print(f"Created and opened {self._filename}")
 
 	def openFile(self, filePath : Path) -> None:
-		self._f = open(filePath, "a+")
+		self._file = open(filePath, "a+")
 		return print(f"Opened {self._filename}")
 
 	def closeFile(self) -> None:
-		print("File closed")
-		self._f.close()
+		print(f"{self._filename} closed")
+		self._file.close()

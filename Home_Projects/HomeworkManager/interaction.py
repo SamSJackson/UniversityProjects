@@ -1,3 +1,5 @@
+from task import Task
+
 class Interaction:
 
 	def user_action(self, userChoice : str, userContent : str):
