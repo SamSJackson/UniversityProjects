@@ -377,8 +377,3 @@ istream& operator>>(istream& is, Matrix& m) {
 	}
 	return is;
 }
-
-int main() {
-	Matrix* practiceMatrix = new Matrix(3, 4);
-	cout << *practiceMatrix << '\n';
-}
