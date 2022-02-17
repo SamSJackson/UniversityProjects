@@ -283,6 +283,7 @@ Matrix Matrix::transpose() {
 			ret.p[i][j] = p[j][i];
 		}
 	}
+	std::cout << "RETURNING TRANSPOSE" << '\n';
 	return ret;
 }
 
@@ -376,9 +377,4 @@ istream& operator>>(istream& is, Matrix& m) {
 		}
 	}
 	return is;
-}
-
-int main() {
-	Matrix* practiceMatrix = new Matrix(3, 4);
-	cout << *practiceMatrix << '\n';
 }
