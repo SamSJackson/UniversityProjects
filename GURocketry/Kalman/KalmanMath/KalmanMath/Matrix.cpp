@@ -283,6 +283,7 @@ Matrix Matrix::transpose() {
 			ret.p[i][j] = p[j][i];
 		}
 	}
+	std::cout << "RETURNING TRANSPOSE" << '\n';
 	return ret;
 }
 

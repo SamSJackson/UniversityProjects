@@ -7,14 +7,14 @@
 using std::istream; using std::ostream; using std::clock; using std::vector;
 using std::pow; 
 
-clock_t KalmanMath::time_called = clock();
-
-Matrix KalmanMath::calculateF(clock_t timestamp) {
-	clock_t time_difference = clock() - timestamp;
+Matrix KalmanMath::calculateF() {
+	clock_t time_difference = clock() - KalmanMath::time_called;
 	double timeInSeconds = time_difference / (double)CLOCKS_PER_SEC;
 	double halfDtSquared = (1.0 / 2.0) * (pow(timeInSeconds, 2.0));
 	vector<vector<double>> matrixList = { {1, timeInSeconds, halfDtSquared}, {0, 1, timeInSeconds}, {0,0,1} };
 	Matrix* FMatrix = new Matrix(matrixList, 3, 3);
+	Sleep(3000);
+	KalmanMath::time_called = clock();
 	return *FMatrix;
 }
 
@@ -28,52 +28,44 @@ StateAndCovariance& KalmanMath::correction(StateAndCovariance& SC, Matrix& senso
 	Matrix postTranspose = (I_3 - kalmanGain * H).transpose();
 	Matrix kalmanTranspose = kalmanGain.transpose();
 	SC.covariance = post * SC.covariance * postTranspose + ((kalmanGain * R) * kalmanTranspose);
-	std::cout << "FINISHING THIS CORRECTION" << '\n';
+	std::cout << "Finished correcting" << '\n';
 	return SC;
 }
 
-StateAndCovariance& KalmanMath::prediction(StateAndCovariance& SC, Matrix& F) {
+StateAndCovariance& KalmanMath::prediction(StateAndCovariance& SC) {
+	Matrix F = KalmanMath::calculateF();
 	Matrix FTranspose = F.transpose();
 	SC.state = F * SC.state;
 	SC.covariance = (F * SC.covariance) * FTranspose;
+	std::cout << "Finished predicting" << '\n';
 	return SC;
 }
 
 void KalmanMath::kalmanLoop(Matrix& H, StateAndCovariance& SC, Matrix& sensorData, Matrix& R) {
-	std::cout << "MADE IT HERE" << '\n';
 	if (H(0, 0) == 1 && H(1, 2) == 1) {
-		std::cout << "Correction first step done here" << '\n';
 		KalmanMath::correction(SC, sensorData, H, R);
-		std::cout << "Correction finished H step done here" << '\n';
 	}
 	else if (H(0, 0) == 1 || H(1, 2) == 1) {
-		std::cout << "Correction small H step done here" << '\n';
 		KalmanMath::correction(SC, sensorData, H, R);
-		std::cout << "Correction finished small H step done here" << '\n';
 	}
 	else {
-		Matrix FMatrix = KalmanMath::calculateF(KalmanMath::time_called);
-		std::cout << "Pre-prediction step" << '\n';
-		KalmanMath::prediction(SC, FMatrix);
-		KalmanMath::time_called = clock();
-		std::cout << "Prediction step" << '\n';
+		KalmanMath::prediction(SC);
 	}
-	std::cout << "THIS IS GOOD" << '\n';
+	KalmanMath::time_called = clock();
 }
 
 int main() {
 	KalmanMath km;
 	StateAndCovariance SC;
-	vector<vector<double>> HList = { {0,0,0}, {0,0,0} };
+	vector<vector<double>> HList = { {1,0,0}, {0,0,1} };
 	Matrix* sensorData = new Matrix();
 	Matrix* H = new Matrix(HList, 2, 3);
 	Matrix* R = new Matrix(2, 2);
 	SC.state = Matrix(3, 1);
 	SC.covariance = Matrix(3, 3);
-	std::cout << KalmanMath::time_called << '\n';
-	km.kalmanLoop(*H, SC, *sensorData, *R);
-	std::cout << KalmanMath::time_called << '\n';
-
+	std::cout << km.time_called << '\n';
+	km.calculateF();
+	std::cout << km.time_called << '\n';
 	return 0;
 }
 
