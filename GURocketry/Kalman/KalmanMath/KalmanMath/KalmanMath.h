@@ -13,6 +13,9 @@ public:
 	StateAndCovariance& correction(StateAndCovariance&, Matrix&, Matrix&, Matrix&);
 	StateAndCovariance& prediction(StateAndCovariance&);
 	void kalmanLoop(Matrix&, StateAndCovariance&, Matrix&, Matrix&);
+
+private:
+	Matrix identity_3 = Matrix::createIdentity(3);
 };
 
 #endif

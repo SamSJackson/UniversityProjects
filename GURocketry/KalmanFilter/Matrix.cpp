@@ -99,8 +99,7 @@ Matrix& Matrix::operator-=(const Matrix& minusMatrix) {
 }
 
 Matrix& Matrix::operator*=(const Matrix& multiplyMatrix) {
-	bool bothMatch = rows_ == multiplyMatrix.rows_ && cols_ == multiplyMatrix.cols_; 
-	if (rows_ != multiplyMatrix.cols_ && !bothMatch) {
+	if (cols_ != multiplyMatrix.rows_) {
 		throw std::invalid_argument("Rows from first matrix must match column from the second or dimensions match");
 	}
 	Matrix temp(rows_, multiplyMatrix.cols_);
@@ -280,8 +279,8 @@ Matrix Matrix::transpose() {
 	Matrix ret(cols_, rows_);
 
 	for (int i = 0; i < rows_; i++) {
-		for (int j = 0; j < cols_; i++) {
-			ret.p[i][j] = p[j][i];
+		for (int j = 0; j < cols_; j++) {
+			ret.p[j][i] = p[i][j];
 		}
 	}
 	return ret;
