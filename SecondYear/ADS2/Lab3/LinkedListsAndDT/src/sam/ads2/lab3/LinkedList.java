@@ -1,37 +1,74 @@
 package sam.ads2.lab3;
 
-public class LinkedList<Item> {
-	private Node<Item> head;
+public class LinkedList {
 	
-	private static class Node<Item> {
-		private Item key;
-		private Node<Item> next;
+	Node head = null;
+	
+	public static class Node {
+		int key;
+		Node next;
 		
+		public Node(int key) {
+			this.key = key;
+		}
 	}
 	
-	public LinkedList() {
-		head = null;
+	private static Node merge(Node a, Node b) {
+		if (a == null) {
+			return b;
+		} else if (b == null) { 
+			return a;
+		}
+		
+		Node x = null;
+	
+		if (a.key <= b.key) {
+			x = a;
+			x.next = merge(a.next, b);
+		} else { 
+			x = b;
+			x.next = merge(a, b.next);
+		}
+		return x;
 	}
 	
-	public LinkedList(Node<Item> head) { 
-		this.head = head;
+	private static Node[] split(Node head) {
+		if (head == null || head.next == null) {
+			return new Node[] {head, null};
+		}
+		Node slow = head;
+		Node fast = head.next;
+		
+		while (fast != null && fast.next != null) { 
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		Node mid = slow.next;
+		slow.next = null;
+		return new Node[] {head, mid};
 	}
 	
-	public LinkedList(Node<Item> head, Node<Item> next) {
-		this.head = head;
-		this.head.next = next;
+	public static Node mergeSort(Node a) {
+		if (a == null || a.next == null) {
+			return a;
+		}
+		Node[] splitList = split(a);
+		Node x = mergeSort(splitList[0]);
+		Node y = mergeSort(splitList[1]);
+		return merge(x,y);
 	}
 	
-	public Item getKey() {
-		return head.key;
+	public void insertAtHead(int key) {
+		Node node = new Node(key);
+		node.next = head;
+		head = node;
 	}
 	
-	public Node<Item> getNext() {
-		return head.next;
+	public void printLinkedList(Node head) {
+		while (head != null) {
+			System.out.print(head.key + " ");
+			head = head.next;
+		}
+		System.out.println();
 	}
-	
-	public void setNext(Node<Item> node) {
-		head.next = node;
-	}
-	
 }

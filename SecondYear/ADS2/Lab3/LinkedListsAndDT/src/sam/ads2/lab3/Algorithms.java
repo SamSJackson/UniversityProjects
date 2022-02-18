@@ -1,23 +1,16 @@
 package sam.ads2.lab3;
 
 public class Algorithms {
-
 	
-	private static LinkedList Merge(LinkedList a, LinkedList b) {
-		if (a == null) {
-			return b;
-		} else if (b == null) {
-			return a;
+	
+	public static void main(String[] args) {
+		int[] array = new int[] {3,2,5,6,7,1};
+		LinkedList listA = new LinkedList();
+		for (int num : array) {
+			listA.insertAtHead(num);
 		}
-		
-		LinkedList x = null;
-		if (a.getKey() <= b.getKey()) {
-			x = a;
-			x.setNext(Merge(a.getNext(), b));
-		} else {
-			x = b;
-			x.setNext(Merge(a, b.getNext()));
-		}
-		return x;
+		listA.printLinkedList(listA.head);
+		listA.mergeSort(listA.head);
+		listA.printLinkedList(listA.head);
 	}
 }
