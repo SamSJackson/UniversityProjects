@@ -1,0 +1,18 @@
+Current Idea:
+University Course Selector with Task Manager (for logged in users).
+
+Things to do:
+- Wireframes
+- ER diagram
+- Walkthrough
+	- Write up Site Map and complete site URL page 
+- System Architecture onto powerpoint (almost done)
+
+Drawing: (available in teams chat)
+
+Tasks Assigned:
+Tianrun - Completing Site map and System Architecture
+Zhiang - Wireframes (Tianrun can help if needed)
+Sam - finish user personas (english one) and help ER diagram
+Laurie - ER diagram with Sam.
+Robert - Site URL

@@ -1,0 +1,27 @@
+Meeting on Monday 21/02/22
+
+Things to finish:
+	- ER Diagram
+	- Final Wireframe to be completed
+	- Compile powerpoint (finish making look fancy)
+	- Almost all finished.
+
+Things we like:
+	- Robert : Python populate
+	- Laurie : Any of it 
+	- Sam : HTML & CSS
+	- Tianrun : HTML & CSS
+	- Zhiang : Any of it
+
+Discussed about ER diagrams:
+	Basically finishing it.
+
+Finishing compiling the powerpoint now.
+All work is semi-done.
+
+Plan for next week:
+	- Meet on Monday, 28/02/22, 5pm-6pm, JMS building
+	- Create codebase for website.
+	- Start basics and assign roles based on what we like. 
+	- Just basic website stuff like base.html, python database start, etc.
+	
