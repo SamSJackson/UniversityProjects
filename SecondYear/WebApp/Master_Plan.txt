@@ -1,0 +1,56 @@
+Tasks have been semi-assigned:
+
+Front-end:
+	- Tianrun
+	- Django Team
+
+Python (populating and database) & Testing:
+	- Laurie
+	- Robert
+	- Django Team
+
+Django:
+	- Sam
+	- Zhiang
+
+Major components of each team:
+
+Front-end:
+	- HTML templates:
+		- Base
+		- University
+		- Course
+	- JS & JQuery:
+		- Task Manager looks (not functionality)
+		- Homepage stuff (weather or whatever on front)
+	- CSS:
+		- Making all pages look nice
+		- Portions included in templates
+
+Python & Testing:
+	- User creation/authentication:
+		- Probably most important task, will work once database is implemented
+	- Population script:
+		- Need to fill all basic content
+		- Successfully communicate with database (AJAX)
+	- Database & Communication:
+		- Successfully create database with AJAX
+		- Allow database communication to be smooth/easy
+	- Testing:
+		- Do best to emulate Rango testing.
+		- Don't go too deep, try to cover basic situations
+			- User creation
+			- Add/remove courses
+			- Add/remove tasks
+			- Content is only for specific user
+
+Django Team:
+	- Bring content together:
+		- Combine HTML templates sucessfully.
+		- Use AJAX to communicate with Database well.
+	- Touching up on content:
+		- Making sure that content is presented in intended way.
+	- Work with other teams:
+		- Provide support to other teams when requested.
+
+
