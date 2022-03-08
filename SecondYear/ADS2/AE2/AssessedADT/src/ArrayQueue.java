@@ -16,6 +16,7 @@ public class ArrayQueue {
 	// Cancel that, it is easier to find and return root with min-heap.
 	//
 
+	// Note that (log n) refers to (log_2 n) as opposed to the standard (log_10 n) since 2 is number of nodes
 	private int[] q;
 	private int n;
 
@@ -26,8 +27,8 @@ public class ArrayQueue {
 
 	public void printArray() {
 		System.out.print("[ ");
-		for (int num : this.q) {
-			System.out.print(num + " ");
+		for (int i=0; i < n; i++) {
+			System.out.print(this.q[i] + " ");
 		}
 		System.out.println("]");
 	}
@@ -46,10 +47,13 @@ public class ArrayQueue {
 		return (2 * i) + 2;
 	}
 
+	// Constant time operation O(1)
 	public int min() {
 		return this.q[0];
 	}
 
+	// Swapping is constant operation + heapify which is O(log n)
+	// Hence extract_min is O(log n) operation
 	public int extract_min() {
 		int index = 0;
 		int num = min();
@@ -61,6 +65,7 @@ public class ArrayQueue {
 		return num;
 	}
 
+	// Operation time worst case is O(log n) since it may have traverse height of tree
 	private void heapify(int i) {
 		int smallest = i;
 		int l = left(i);
@@ -76,12 +81,21 @@ public class ArrayQueue {
 			heapify(smallest);
 		}
 	}
+	
+	// O(n) * O(log n) since insert is O(log n) operation
+	// Hence O(n log n) operation 
+	public void build_heap(int[] arr) {
+		for (int num : arr) {
+			insert(num);
+		}
+	}
 
+	// O(log n) operation since heapify
 	public void insert(int x) {
 		this.q[n++] = x;
 		// If not at root
 		if (n - 1 != 0) {
-			// Work way down tree, checking if insertion has violated heap rule
+			// Work way down tree from parent, checking if insertion has violated heap rule
 			for (int i = (n / 2) - 1; i >= 0; i--) {
 				heapify(i);
 			}
