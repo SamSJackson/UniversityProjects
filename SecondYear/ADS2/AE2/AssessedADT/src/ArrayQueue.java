@@ -22,12 +22,12 @@ public class ArrayQueue {
 
 	public ArrayQueue(int n) {
 		this.n = 0;
-		this.q = new int[n];
+		this.q = new int[n+1]; // Index 0 is kept empty
 	}
 
 	public void printArray() {
 		System.out.print("[ ");
-		for (int i=0; i < n; i++) {
+		for (int i=1; i < n; i++) {
 			System.out.print(this.q[i] + " ");
 		}
 		System.out.println("]");
@@ -46,10 +46,14 @@ public class ArrayQueue {
 	private int right(int i) {
 		return (2 * i) + 2;
 	}
+	
+	private int parent(int i) {
+		return i/2;
+	}
 
 	// Constant time operation O(1)
 	public int min() {
-		return this.q[0];
+		return this.q[1];
 	}
 
 	// Swapping is constant operation + heapify which is O(log n)
@@ -65,7 +69,7 @@ public class ArrayQueue {
 		return num;
 	}
 
-	// Operation time worst case is O(log n) since it may have traverse height of tree
+	// Operation time worst case is O(log n) since it may have to traverse height of tree
 	private void heapify(int i) {
 		int smallest = i;
 		int l = left(i);
@@ -89,16 +93,20 @@ public class ArrayQueue {
 			insert(num);
 		}
 	}
+	
 
 	// O(log n) operation since heapify
 	public void insert(int x) {
-		this.q[n++] = x;
+		if (n == q.length) {
+			System.out.println("Overflow");
+			return;
+		}
+		this.q[++n] = x;
 		// If not at root
-		if (n - 1 != 0) {
-			// Work way down tree from parent, checking if insertion has violated heap rule
-			for (int i = (n / 2) - 1; i >= 0; i--) {
-				heapify(i);
-			}
+		int k = n;
+		while (k > 1 && this.q[k/2] > this.q[k]) {
+			swap(k, k/2);
+			k = k/2;
 		}
 	}
 
