@@ -27,7 +27,7 @@ public class ArrayQueue {
 
 	public void printArray() {
 		System.out.print("[ ");
-		for (int i=1; i < n; i++) {
+		for (int i=1; i <= n; i++) {
 			System.out.print(this.q[i] + " ");
 		}
 		System.out.println("]");
@@ -47,9 +47,6 @@ public class ArrayQueue {
 		return (2 * i) + 2;
 	}
 	
-	private int parent(int i) {
-		return i/2;
-	}
 
 	// Constant time operation O(1)
 	public int min() {
@@ -59,13 +56,11 @@ public class ArrayQueue {
 	// Swapping is constant operation + heapify which is O(log n)
 	// Hence extract_min is O(log n) operation
 	public int extract_min() {
-		int index = 0;
+		int index = 1;
 		int num = min();
-		swap(index, n - 1);
-		this.q[--n] = 0;
-		for (int i = (n / 2) - 1; i >= 0; i--) {
-			heapify(i);
-		}
+		swap(index, n);
+		this.q[n--] = 0;
+		heapify(1);
 		return num;
 	}
 
@@ -95,7 +90,7 @@ public class ArrayQueue {
 	}
 	
 
-	// O(log n) operation since heapify
+	// O(log n) operation in worse case since may have to traverse height of tree
 	public void insert(int x) {
 		if (n == q.length) {
 			System.out.println("Overflow");
@@ -108,6 +103,7 @@ public class ArrayQueue {
 			swap(k, k/2);
 			k = k/2;
 		}
+		heapify(1);
 	}
 
 }

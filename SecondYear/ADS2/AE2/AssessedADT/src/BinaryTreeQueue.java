@@ -17,6 +17,7 @@ public class BinaryTreeQueue {
 			this.right = null;
 			this.p = null;
 		}
+		
 		@Override
 		public String toString() {
 			return this.key + "";
