@@ -56,6 +56,10 @@ public class ArrayQueue {
 	// Swapping is constant operation + heapify which is O(log n)
 	// Hence extract_min is O(log n) operation
 	public int extract_min() {
+		if (n == 0) {
+			System.out.println("Underflow");
+			return -1;
+		}
 		int index = 1;
 		int num = min();
 		swap(index, n);
@@ -97,8 +101,8 @@ public class ArrayQueue {
 			return;
 		}
 		this.q[++n] = x;
-		// If not at root
 		int k = n;
+		// If not at root
 		while (k > 1 && this.q[k/2] > this.q[k]) {
 			swap(k, k/2);
 			k = k/2;

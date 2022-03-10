@@ -3,7 +3,7 @@
 // Note that this queue is min-priority queue	
 public class BinaryTreeQueue {
 	
-	public Node root;
+	private Node root;
 	
 	private class Node { 
 		private int key;
