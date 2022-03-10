@@ -1,0 +1,16 @@
+{% extends 'WOF/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+	Second register page
+{% endblock %}
+
+{% block body_block %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}"/>
+	<form method="post" action="{% url 'WOF:user_register' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ student_user_form.as_p }}
+
+		<input type="submit" name="submit" value="Register" />
+	</form>
+{% endblock%}
