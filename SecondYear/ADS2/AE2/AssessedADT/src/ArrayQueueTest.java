@@ -19,7 +19,7 @@ class ArrayQueueTest {
 	void compareCreatingTest() {
 		int[] arr = new int[]{15, 12, 10, 17, 4, 1, 11, 7, 9, 20, 8};
 		ArrayQueue arrQueue = new ArrayQueue(arr.length);
-		arrQueue.build_heap(arr);
+		arrQueue.build_min_heap(arr);
 		addNumbers(arr);
 		Integer[] priorityArray = priorityQueue.toArray(new Integer[11]);
 		boolean equals = true;
