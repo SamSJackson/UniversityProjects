@@ -24,6 +24,10 @@ public class ArrayQueue {
 		this.n = 0;
 		this.q = new int[n+1]; // Index 0 is kept empty
 	}
+	
+	public int size() {
+		return this.n;
+	}
 
 
 	public void printArray() {
@@ -41,11 +45,11 @@ public class ArrayQueue {
 	}
 
 	private int left(int i) {
-		return (2 * i) + 1;
+		return (2 * i);
 	}
 
 	private int right(int i) {
-		return (2 * i) + 2;
+		return (2 * i) + 1;
 	}
 	
 
@@ -74,7 +78,7 @@ public class ArrayQueue {
 		int smallest = i;
 		int l = left(i);
 		int r = right(i);
-		if (l < this.n && this.q[l]< this.q[smallest]) {
+		if (l < this.n && this.q[l] < this.q[smallest]) {
 			smallest = l;
 		}
 		if (r < this.n && this.q[r] < this.q[smallest]) {
@@ -104,7 +108,7 @@ public class ArrayQueue {
 		this.q[++n] = x;
 		int k = n;
 		// If not at root
-		while (k > 1 && this.q[k/2]> this.q[k]) {
+		while (k > 1 && this.q[k/2] > this.q[k]) {
 			swap(k, k/2);
 			k = k/2;
 		}

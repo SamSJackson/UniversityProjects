@@ -13,22 +13,22 @@ public class TestingDS {
 		// N ropes of different length
 		// Need to connect to form a single rope with minimum cost
 		// Cost of connecting two ropes is sum of their lengths
-		BinaryTreeConstantQueue priorityQueueBST = new BinaryTreeConstantQueue();
+		ArrayQueue arrQueue = new ArrayQueue(nRopes.length*2);
 		for (int num : nRopes) {
-			priorityQueueBST.insert(num);
+			arrQueue.insert(num);
 		}
 		int[] sequence = new int[nRopes.length * 2 - 2];
 		int counter = 0, cost = 0;
-		while (priorityQueueBST.size() > 1) {
-			int firstRope = priorityQueueBST.extract_min();
-			int secondRope = priorityQueueBST.extract_min();
+		while (arrQueue.size() > 1) {
+			arrQueue.printArray();
+			int firstRope = arrQueue.extract_min();
+			int secondRope = arrQueue.extract_min();
 			cost += firstRope + secondRope;
-			priorityQueueBST.insert(firstRope + secondRope);
+			arrQueue.insert(firstRope + secondRope);
 			sequence[counter++] = firstRope;
 			sequence[counter++] = secondRope;
-			priorityQueueBST.printTree(priorityQueueBST.getRoot(), "");
 		}
-		priorityQueueBST.printTree(priorityQueueBST.getRoot(), "");
+		arrQueue.printArray();
 		return createSequence(sequence) + cost;
 	}
 	
