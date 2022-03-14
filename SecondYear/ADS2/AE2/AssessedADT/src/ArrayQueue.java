@@ -14,16 +14,21 @@ public class ArrayQueue {
 	// Going to create heap array with max-heap otherwise hard to remove from root
 	// with extract-min
 	// Cancel that, it is easier to find and return root with min-heap.
-	//
+	
 
 	// Note that (log n) refers to (log_2 n) as opposed to the standard (log_10 n) since 2 is number of nodes
-	private int[] q;
+	public int[] q;
 	private int n;
-
+	
 	public ArrayQueue(int n) {
 		this.n = 0;
 		this.q = new int[n+1]; // Index 0 is kept empty
 	}
+	
+	public int size() {
+		return this.n;
+	}
+
 
 	public void printArray() {
 		System.out.print("[ ");
@@ -40,11 +45,11 @@ public class ArrayQueue {
 	}
 
 	private int left(int i) {
-		return (2 * i) + 1;
+		return (2 * i);
 	}
 
 	private int right(int i) {
-		return (2 * i) + 2;
+		return (2 * i) + 1;
 	}
 	
 
@@ -87,7 +92,7 @@ public class ArrayQueue {
 	
 	// O(n) * O(log n) since insert is O(log n) operation
 	// Hence O(n log n) operation 
-	public void build_heap(int[] arr) {
+	public void build_min_heap(int[] arr) {
 		for (int num : arr) {
 			insert(num);
 		}
