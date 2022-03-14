@@ -29,7 +29,6 @@ public class ArrayQueue {
 		return this.n;
 	}
 
-
 	public void printArray() {
 		System.out.print("[ ");
 		for (int i=1; i <= n; i++) {
@@ -68,18 +67,21 @@ public class ArrayQueue {
 		int index = 1;
 		int num = min();
 		swap(index, n);
-		this.q[n--] = 0;
+		this.q[n] = 0;
 		heapify(1);
+		n--;
 		return num;
 	}
 
 	// Operation time worst case is O(log n) since it may have to traverse height of tree
 	private void heapify(int i) {
-		int smallest = i;
+		int smallest;
 		int l = left(i);
 		int r = right(i);
-		if (l < this.n && this.q[l] < this.q[smallest]) {
+		if (l < this.n && this.q[l] < this.q[i]) {
 			smallest = l;
+		} else { 
+			smallest = i;
 		}
 		if (r < this.n && this.q[r] < this.q[smallest]) {
 			smallest = r;

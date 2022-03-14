@@ -81,7 +81,7 @@ public class TestingDS {
 //		System.out.println(bst2.extract_min());
 //		bst2.printTree(bst2.getRoot(), "");
 		
-		int[] nRopes = new int[] {6,10,2,11,7,4};
+		int[] nRopes = new int[] {4, 8, 3, 1, 6, 9, 12, 7, 2};
 		String ropesCost = TestingDS.connectingRopes(nRopes);
 		System.out.println(ropesCost);
 		
