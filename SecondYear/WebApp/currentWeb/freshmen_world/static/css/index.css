@@ -2,7 +2,7 @@
     here is css for main body
 */
 .mainbody{
-    width: 90vw;
+    width: 80vw;
     margin: 0 auto; 
     border-top: 2px solid black;
     display: grid;

@@ -25,7 +25,7 @@
                         <div class="logo"><img src="{% static 'images/logo.png' %}" alt="Logo"></div>
                         <div class="bar_link"><a href="{% url 'WOF:selector' %}">Course Selector</a></div>
                         <div class="bar_link"><a href="{% url 'WOF:task_manager' %}">Task Manager</a></div>
-                        <div class="bar_link"><a href="">Logout</a></div>
+                        <div class="bar_link"><a href="{% url 'WOF:logout' %}">Logout</a></div>
                     </div>
                 {% else %}
                     <div class="top_bar_nonlogin"> 
