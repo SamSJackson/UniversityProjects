@@ -20,7 +20,6 @@ public class TestingDS {
 		int[] sequence = new int[nRopes.length * 2 - 2];
 		int counter = 0, cost = 0;
 		while (arrQueue.size() > 1) {
-			arrQueue.printArray();
 			int firstRope = arrQueue.extract_min();
 			int secondRope = arrQueue.extract_min();
 			cost += firstRope + secondRope;
@@ -28,8 +27,7 @@ public class TestingDS {
 			sequence[counter++] = firstRope;
 			sequence[counter++] = secondRope;
 		}
-		arrQueue.printArray();
-		return createSequence(sequence) + cost;
+		return createSequence(sequence) + "\nRope connection cost: " + cost;
 	}
 	
 	
