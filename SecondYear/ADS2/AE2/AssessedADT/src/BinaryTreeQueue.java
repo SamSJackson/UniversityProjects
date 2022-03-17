@@ -9,7 +9,7 @@ public class BinaryTreeQueue {
 		private int key;
 		private Node left, right;
 		
-		public Node(int key, int size) {
+		public Node(int key) {
 			this.key = key;
 			this.left = null;
 			this.right = null;
@@ -48,7 +48,7 @@ public class BinaryTreeQueue {
 	
 	// Operation is O(n) for left/right-skewed trees
 	public void insert(int key) {
-		Node z = new Node(key, 2);
+		Node z = new Node(key);
 		Node y = null;
 		Node x = this.root;
 		while (x != null) {

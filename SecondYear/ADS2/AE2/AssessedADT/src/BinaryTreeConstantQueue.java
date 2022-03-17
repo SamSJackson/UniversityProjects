@@ -9,7 +9,7 @@ public class BinaryTreeConstantQueue {
 		private int key;
 		private Node left, right, p;
 		
-		public Node(int key, int size) {
+		public Node(int key) {
 			this.key = key;
 			this.left = null;
 			this.right = null;
@@ -76,7 +76,7 @@ public class BinaryTreeConstantQueue {
 	}
 	
 	public void insert(int key) {
-		Node z = new Node(key, 2);
+		Node z = new Node(key);
 		Node y = null;
 		Node x = this.root;
 		while (x != null) {
