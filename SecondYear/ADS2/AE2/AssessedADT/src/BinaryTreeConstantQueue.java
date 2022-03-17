@@ -1,3 +1,5 @@
+import java.util.NoSuchElementException;
+
 public class BinaryTreeConstantQueue {
 	
 	private Node root;
@@ -6,11 +8,9 @@ public class BinaryTreeConstantQueue {
 	private class Node { 
 		private int key;
 		private Node left, right, p;
-		private int size;
 		
-		public Node(int key, int size) {
+		public Node(int key) {
 			this.key = key;
-			this.size = size;
 			this.left = null;
 			this.right = null;
 			this.p = null;
@@ -27,7 +27,7 @@ public class BinaryTreeConstantQueue {
 		root = null;
 	}
 	
-	public boolean empty() { 
+	public boolean isEmpty() { 
 		return this.root == null;
 	}
 	
@@ -48,6 +48,7 @@ public class BinaryTreeConstantQueue {
 	}
 	
 	public int min() {
+		if (isEmpty()) throw new NoSuchElementException("Empty BST");
 		return this.smallest.key;
 	}
 	
@@ -75,7 +76,7 @@ public class BinaryTreeConstantQueue {
 	}
 	
 	public void insert(int key) {
-		Node z = new Node(key, 2);
+		Node z = new Node(key);
 		Node y = null;
 		Node x = this.root;
 		while (x != null) {
