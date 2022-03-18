@@ -1,7 +1,7 @@
 import java.util.NoSuchElementException;
 
 // Note that this queue is min-priority queue	
-public class BinaryTreeQueue {
+public class BSTQueue {
 	
 	private Node root;
 	
@@ -21,12 +21,8 @@ public class BinaryTreeQueue {
 		}
 		
 	}
-	public BinaryTreeQueue() {
+	public BSTQueue() {
 		root = null;
-	}
-	
-	public Node getRoot() {
-		return this.root;
 	}
 	
 	public boolean isEmpty() { 
@@ -69,19 +65,20 @@ public class BinaryTreeQueue {
 	}
 	
 	// Operation is O(n) for worst case in case of only elements on left side
-	public int min() {
+	public Node min() {
 		if (isEmpty()) throw new NoSuchElementException("Empty BST");
 		return min(this.root);
 	}
 	
-	public int min(Node x) {
-		if (x.left == null) return x.key;
+	public Node min(Node x) {
+		if (x.left == null) return x;
 		return min(x.left);
 	}
 	
 	// Removing a leaf is a O(1) constant operation 
 	// operation remains O(n) due to finding minimum
-	public int extract_min() {
+	public Node extract_min() {
+		if (isEmpty()) throw new NoSuchElementException("Empty BST");
 		Node x = this.root;
 		Node parent = null;
 		while (x.left != null) {
@@ -101,7 +98,7 @@ public class BinaryTreeQueue {
 				parent.left = null;
 			}
 		}
-		return x.key;
+		return x;
 	}
 	
 	public void printTree(Node node, String prefix) {

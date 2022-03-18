@@ -1,28 +1,18 @@
 import java.util.NoSuchElementException;
 
-/* SOLUTION IS BROKEN 
- * ACTUAL SOLUTION:
- * 	CREATE RESIZABLE ARRAY
- * 	INSERT INTO ARRAY AND INSERTION SORT
- * 	MIN IS JUST FIRST ELEMENT OF ARRAY
- * 	EXTRACT_MIN IS POP FIRST ELEMENT OF ARRAY
- * 	THEN EXTRACT_MIN IS A MINE FIELD OF IF-STATEMENTS
- * */
-
-public class BinaryTreeConstantQueue {
+// Note that this queue is min-priority queue	
+public class BSTQueue {
 	
 	private Node root;
-	private Node smallest;
 	
 	private class Node { 
 		private int key;
-		private Node left, right, p;
+		private Node left, right;
 		
 		public Node(int key) {
 			this.key = key;
 			this.left = null;
 			this.right = null;
-			this.p = null;
 		}
 		
 		@Override
@@ -31,8 +21,7 @@ public class BinaryTreeConstantQueue {
 		}
 		
 	}
-	
-	public BinaryTreeConstantQueue() {
+	public BSTQueue() {
 		root = null;
 	}
 	
@@ -52,38 +41,8 @@ public class BinaryTreeConstantQueue {
 		}
 	}
 	
-	public Node getRoot() {
-		return this.root;
-	}
 	
-	public int min() {
-		if (isEmpty()) throw new NoSuchElementException("Empty BST");
-		return this.smallest.key;
-	}
-	
-	public int extract_min() {
-		Node x = this.smallest;
-		if (x == this.root) {
-			if (x.right != null) {
-				this.root = this.root.right;
-				this.smallest = this.root;
-			} else {
-				this.root = null;
-				this.smallest = null;
-			}
-		} else {
-			if (x.right != null) {
-				x.p.left = x.right;
-				x.right.p = x.p;
-				this.smallest = x.p.left;
-			} else {
-				x.p.left = null;
-				this.smallest = x.p;
-			}
-		}
-		return x.key;
-	}
-	
+	// Operation is O(n) for left/right-skewed trees
 	public void insert(int key) {
 		Node z = new Node(key);
 		Node y = null;
@@ -96,24 +55,55 @@ public class BinaryTreeConstantQueue {
 				x = x.right;
 			}
 		}
-		z.p = y;
 		if (y == null) {
 			this.root = z;
-			this.smallest = z;
 		} else if (z.key < y.key) {
 			y.left = z;
-			if (y == smallest) {
-				smallest = z;
-			}
 		} else { 
 			y.right = z;	
 		}
 	}
 	
+	// Operation is O(n) for worst case in case of only elements on left side
+	public Node min() {
+		if (isEmpty()) throw new NoSuchElementException("Empty BST");
+		return min(this.root);
+	}
+	
+	public Node min(Node x) {
+		if (x.left == null) return x;
+		return min(x.left);
+	}
+	
+	// Removing a leaf is a O(1) constant operation 
+	// operation remains O(n) due to finding minimum
+	public Node extract_min() {
+		if (isEmpty()) throw new NoSuchElementException("Empty BST");
+		Node x = this.root;
+		Node parent = null;
+		while (x.left != null) {
+			parent = x;
+			x = x.left;
+		}
+		if (x == this.root) {
+			if (x.right != null) {
+				this.root = this.root.right;
+			} else {
+				this.root = null;
+			}
+		} else {
+			if (x.right != null) {
+				parent.left = parent.left.right;
+			} else { 
+				parent.left = null;
+			}
+		}
+		return x;
+	}
+	
 	public void printTree(Node node, String prefix) {
 		if(node == null) 
 			return;
-		
 		System.out.println(prefix + " + " + node.key);
 		printTree(node.left , prefix + " ");
 		printTree(node.right , prefix + " ");
