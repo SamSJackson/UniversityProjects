@@ -67,21 +67,19 @@ public class TestingDS {
 //		bst.printTree(bst.getRoot(), "");
 		
 		
-//		BinaryTreeConstantQueue bst2 = new BinaryTreeConstantQueue();
-//		bst2.insert(11);
-//		bst2.insert(4);
-//		bst2.insert(15);
-//		bst2.insert(6);
-//		bst2.insert(5);
-//		bst2.insert(8);		
-//		bst2.printTree(bst2.getRoot(), "");
-//		System.out.println(bst2.size(bst2.getRoot()));
-//		System.out.println(bst2.extract_min());
-//		bst2.printTree(bst2.getRoot(), "");
+		BinaryTreeConstantQueue bst2 = new BinaryTreeConstantQueue();
+		bst2.insert(10);
+		bst2.insert(20);
+		bst2.insert(25);
+		bst2.insert(12);
+		bst2.insert(13);
+		bst2.printTree(bst2.getRoot(), "");
+		System.out.println(bst2.extract_min());
+		bst2.printTree(bst2.getRoot(), "");
 		
-		int[] nRopes = new int[] {4, 8, 3, 1, 6, 9, 12, 7, 2};
-		String ropesCost = TestingDS.connectingRopes(nRopes);
-		System.out.println(ropesCost);
+//		int[] nRopes = new int[] {4, 8, 3, 1, 6, 9, 12, 7, 2};
+//		String ropesCost = TestingDS.connectingRopes(nRopes);
+//		System.out.println(ropesCost);
 		
 	}
 
