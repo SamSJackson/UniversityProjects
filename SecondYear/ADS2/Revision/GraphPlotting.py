@@ -1,7 +1,7 @@
 import timeit, random
 import matplotlib.pyplot as plt
 
-def create_arr_of_arrays(max_size: int, max_number : int):
+def create_arr_of_arrays(max_size: int, max_number : int) -> list:
 	sumArray = []
 	for i in range(max_size):
 		this_turn_max = random.randint(1, max_number)
