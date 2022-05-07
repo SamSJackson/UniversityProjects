@@ -1,0 +1,138 @@
+
+## Question 1
+a) 
+
+public static void insert(int e, BNode nd) {
+	BNode x = nd;
+	while (x != null) {
+		BNode y = x;
+		if (e < x.getItem()) {
+			x = x.getLeft();
+		} else if (e > x.getItem()) {
+			x = x.getRight();
+		} else {
+			return;
+		}
+	}
+	BNode z = new BNode(e);
+	if (e < y.getItem()) {
+		y.setLeft(z);
+	} else if (e > y.getItem()) {
+		y.setRight(z);
+	}
+	return;
+}
+
+b)
+
+public boolean isPresent(int e, BNode nd) {
+	BNode x = nd;
+	while (x != null) {
+		if (e == x.getItem()) {
+			return true;
+		} else if (e < x.getItem()) {
+			x = x.getLeft();
+		} else if (e > x.getItem()) {
+			x = x.getRight();
+		}
+	}
+	return false;
+}
+
+c) 
+Tree drawn on paper.
+Height of the tree is 4
+
+Preorder:
+30, 24, 11, 13, 26, 40, 36, 58, 48
+
+Inorder:
+11, 13, 24, 26, 30, 36, 40, 48, 58
+
+Postorder:
+13, 11, 26, 24, 36, 48, 58, 40, 30
+
+d)
+Tree re-drawn on paper.
+Algorithm used:
+Given that item 30 is the root node and contains two subtrees then we we used the following algorithm:
+
+The successor node of item 30 is found (item 36) and they are swapped in the tree. Item 30 is now in a position with no children and is simply removed by taken away by removing the link from the parent (removing parent's left child).
+
+## Question 2
+
+a)
+We have not learnt pigeonhole sort I will skip this for now.
+
+b) 
+Radix sort is a non-comparative sorting algorithm.
+It is a sorting algorithm that sorts based on a single digit at a time. 
+
+It is fairly accurate to imagine radix sort as a table, with d * n as the rows and columns, where d is the length of the longest digit and n is the number of elements.
+
+Radix sort will sort each column, one at a time. 
+It sorts using a STABLE sorting algorithm, most commonly counting-sort but any stable algorithm works.
+
+The complexity of radix sort is O(n(d+b)), where b is the base used, most commonly base 10.
+
+It is incredibly suitable for this task because the size of the data set is significantly larger than the size of the data (100-220, only 3 digits).
+This is great for radix sort, since it means it only has to sort over 3 columns, hence O(n(3 + 10)) = O(3n + 10n) = O(n), which is great for a sorting algorithm.
+
+c)
+Still don't know pigeonhole sort.
+
+## Question 3
+
+a)
+filter1: O(n)
+Explanation:
+filter1 takes parameters Person x and ArrayList<Person> people.
+filter1, initially, creates an empty arraylist of object Person. 
+It iterates over the arraylist people. Since people could have a varying size, then it will iterate n times.
+The method then iterates over the arraylist people again, similarly iterating n times.
+
+Therefore, we have at least 2n binary operations.
+Hence 2n <= cn_0
+for c = 2, n_0 = 1 Therefore O(n).
+
+
+filter2: O(n)
+Explanation:
+filter2 takes parameters Person x and ArrayList<Person> people.
+
+filter2 initially creates an empty arraylist of object Person.
+filter2 then iterates over the arraylist people, which has a varying size n. This means that filter2 must iterate at least n times. 
+
+Therefore filter2 has at least n binary operations.
+Hence n <= cn_0
+for c = 1, n_0 = 1. Therefore O(n).
+
+b)
+filter3 iterates for a certain length, rather than each element of the array, as seen in filter2.
+
+filter3 then obtains the Person object using arraylist get() method. 
+This is the fundamental difference and there is a marginal difference in speed that could be considered to run faster.
+
+This is a marginal increase and does not come under real optimisation, more so micro-optimisation.
+
+## Question 4
+
+a) 
+Drawn on paper.
+
+b)
+To remove(8):
+8 will be hashed, if 8 is not found at the hashed index location then it will iterate the entire table until it is found. Once it is found, it will delete the value from the key in the hashtable (opening up that slot for insertion).
+
+Similar idea is used for get(64) and get(15)
+get(64) will used the hash function on 64, obtaining 64 % 7 = 1. The table then looks at index 1. If the number there is not 64 (which it is not) then it will increment the index until we arrive at 64, at index 3, returning true.
+
+The same thing happens for get(15). 
+15 % 7 = 1.
+The table will look at index 1, it will check the value and see that it is not equal to 15. This will continue to iterate until we return back to index 1, where it will return false, as 15 was not in the hash table.
+
+c)
+Using separate chaining, create the hashtable, with sequence calls
+[10, 21, 17, 19, 8, 5, 22, 11]
+Drawn on paper.
+

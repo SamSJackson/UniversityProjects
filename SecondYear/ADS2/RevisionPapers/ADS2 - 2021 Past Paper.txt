@@ -1,0 +1,260 @@
+ADS2 - 2021 Past Paper
+
+## Question 1
+
+a)
+F implements a recursive method that reverses the elements in the integer array between a lower bound of p and an upper bound of r.
+
+b)
+[1, 4, 3, 9, 7, 5, 1]
+
+c)
+Recursion trace drawn on paper
+
+d)
+F is tail recursive.
+This is because the final call in the recursive calls is the final output of the entire method.
+In other words, nothing acts on the recursive call when it returns to its parent call.
+
+e)
+F is an in-place algorithm. The array A is being passed by reference (object) and hence the same array is being acted on in each recursive call.
+
+Furthermore, no other arrays are being created to store the information, only a temporary variables for storing an element to be swapped.
+
+f)
+Iterative method of F
+
+ITER-F(A,p,r)
+	while (p < r)
+		x := A[p]
+		A[p] := A[r]
+		A[r] := x
+		p := p + 1
+		r := r - 1
+	return
+
+Complexity of ITER-F.
+n is the size of the array.
+
+Given we start from the lower bound and the upper bound, incrementing and decrementing on each loop, then we only have to run the while loop for half the size of the array.
+Therefore the while loop is at least n/2 operations.
+In terms of big-O complexity, we have:
+n/2 <= cn
+If c = 1, for n_0 = 1.
+
+Therefore the complexity is O(n/2) = O(n)
+
+## Question 2
+
+a) True, written on paper.
+b) False,
+
+## Question 3
+
+a)
+Description of counting sort algorithm.
+
+Counting sort is a non-comparative sorting algorithm with a worst case complexity of O(n + k), for k as the range of numbers (from smallest to large).
+
+Counting sort functions such that is creates an empty array of the length k (max number - smallest number)
+
+Counting sort then adds up the number of appearances of each number into the new array, let's call it count_array.
+
+Count_array then has a rolling sum operation passed on it. Most easily described as each element in the array will have the elements before it in the last added to it.
+Similarly to a ball picking up pace, hence rolling sum.
+
+Finally, we use a dictionary like process on the count_array to place the elements into a new array, let's call it sorted_array.
+
+Example:
+A = [3, 7, 4, 2, 1, 5, 4]
+Create array of size 7 (since 7 is largest number).
+[0, 1, 1, 1, 2, 1, 0, 1]
+Rolling sum on this:
+[0, 1, 2, 3, 5, 6, 6, 7]
+Placing the elements into the new array, with same size as A
+
+sorted_A = [0, 0, 0, 0, 0, 0, 0]
+
+Using the following method of:
+sorted_A[count_array[A[i]] - 1] = A[i]
+At i = n-1 (n is the size of array),
+	index := A[i] # A[n-1] = 4
+	sorted_A[count_array[4] - 1] = A[i] # sorted_A[5 - 1] = 4
+	# sorted_A = [0, 0, 0, 0, 4, 0, 0]
+	count_array[index] := count_array[index] - 1
+	i := i - 1
+
+This continues down the array, using the count_array as a dictionary, 
+with the initial array as the access value.
+Ending up with:
+[1, 2, 3, 4, 4, 5, 7]
+
+b)
+The radix sort algorithm is a non-comparative sorting algorithm that relies on a STRONGLY stable sorting algorithm internally and effectively places the elements into a table of n * d, where d is the longest number in terms of digits and n is the number the elements.
+Radix sort also has the ability to sort with different bases, as opposed to normal base of base 10.
+Hence the complexity of radix sort O(d(n+b)), where d is the longest digit, b is the base and n is number of elements.
+
+Radix sort then sorts, traditionally, from the first column. Futhermore, counting sort is normally the stable sorting algorithm that radix sort relies on for the sorting of the digits.
+
+It requires a stable sorting algorithm because it requires maintaining the order of duplicate elements because there will definitely be duplicates digits for cases when there is more than 10 digits (if using base 10), and if not stable it would lead to putting digits with the wrong body of numbers.
+
+Can imagine the following sort 
+802
+256
+958
+938
+693
+405
+684
+854
+
+Stably sorting the digits of column 1 first, (rightmost column).
+
+802
+693
+684
+854
+405
+256
+958
+938
+
+Same for column 2
+
+802 
+405
+938
+854
+256
+958
+684
+693
+
+Finally for column 3
+
+256
+405
+684
+693
+802
+938
+954
+958
+
+And now the array is sorted,
+with [256, 405, 684, 693, 802, 938, 954, 958]
+
+## Question 4
+
+a) Stack S is implemented on array S
+If the stack is implemented on the array, then the following methods are defined briefly:
+PUSH(S, x) : add element x to the tail index of array.
+POP(S) : return and remove value at tail index of array, decrement tail index.
+
+Illustrating actions
+S = [0, 0, 0, 0, 0, 0]
+tail = null
+PUSH(S, 5) -> S = [5, 0, 0, 0, 0, 0]
+tail = 0
+PUSH(S, 2) ->  S = [5, 2, 0, 0, 0, 0]
+tail = 1
+PUSH(S, 4) -> S = [5, 2, 4, 0, 0, 0]
+tail = 2
+POP(S) -> S = [5, 2, 0, 0, 0, 0], return 4
+tail = 1
+PUSH(S, 7) -> S = [5, 2, 7, 0, 0, 0]
+tail = 2
+POP(S) -> S = [5, 2, 0, 0, 0, 0], return 7
+tail = 1
+
+b) Stack S is implemented on a linked list.
+
+If the stack is implemented on an array, then the 
+following methods are defined briefly:
+PUSH(S, x) : add new node as head, set next as previous head.
+PUSH(S, x)
+	x := Node(x)
+	x.next := S.head
+	S.head := x
+POP(S) : return head.
+POP(S) 
+	if (S.head == null)
+		return "underflow"
+	x := S.head
+	S.head = S.head.next
+	return x
+
+Illustration:
+S = LinkedList, S.head = null
+
+PUSH(S, 5) -> 
+	S = 5 -> null
+PUSH(S, 2) ->
+	S = 2 -> 5 -> null
+PUSH(S, 4) ->
+	S = 4 -> 2 -> 5 -> null
+POP(S) ->
+	S = 2 -> 5 -> null
+	return 4
+PUSH(S, 7) ->
+	S = 7 -> 2 -> 5 -> null
+POP(S) ->
+	S = 2 -> 5 -> null
+	return 7
+
+## Question 5
+
+a) Brief explanation of a hash table.
+
+A hash table is a data structure that holds information in a key,value pair where the key is used to access the value from the hash table.
+
+The main components of a hash table are the hash function, hash collision resolution method and the data structure, typically array, used to store the information.
+
+The hash function is a function which takes the the key, transforms the key into an index (according to the hash function) and uses the index to obtain the item.
+
+In other terms, index(x) := hash(x)
+where hash(x) is some function. e.g.
+hash(x) := x mod m, for m is the size of the table.
+
+The main operations are 
+GET(key)
+INSERT(key, value)
+DELETE(key)
+
+b) A brief explanation of a hash collision
+A hash collision due to the hash function (or too many elements). 
+If an element being inserted is sent to an index x, (index x obtained from the hash function) but index already contains an item, then a hash collision will occur.
+
+An application for which hashtable storage may be useful would be storing university students (ID is the key, name is the value).
+
+c)
+The chaining method of hash collision resolution is a resolution such that when a hash collision occurs, the new element is inserted at the head to the current position, as a linked list.
+This means that each element in the hashtable is a linked list.
+
+The advantage is that insert remains a constant operation since inserting at the head is O(1) operation.
+
+d)
+5, 28, 19, 15, 20, 33, 12, 17, 10
+Written on paper.
+
+e)
+Open addressing method of collision resolution is the method of probing upon a collision.
+
+If a collision occurs, according to the method of probing (be it linear, quadratic, cubic), a new index is selected from the current position, this continues until an empty slot is found.
+For example, index 1 in the hashtable is full, linear probing function goes to index 2, also full, then continues until index 15.
+
+This also requires that when an item is deleted, it has a value of DELETED so that the probing method skips over it, to avoid a null error.
+
+Linear probing in the worst case big O notation O(n), because the hashtable may be completely full.
+
+Quadratic probing is slightly better most of the time but still O(n).
+
+f)
+50, 700, 76, 85, 92, 73, 101
+Written on paper.
+
+
+
+
+
+

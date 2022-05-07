@@ -1,0 +1,167 @@
+ADS2 - 2013 Past Paper
+
+
+## Question 1
+
+a) 
+The method 'f' takes an array of strings, S, as a parameter.
+'f' then creates a new array list and copies, S, into the new array L.
+From this point, while iterating over S, elements are moving around through.
+Effectively, this method randomly shuffles an array of strings.
+
+A suitable name for this would be shuffle.
+
+b)
+The complexity of 'f' is O(n).
+This is because the method f is only iterating over the number of elements in the array that is passed as an argument. 
+
+There is a for loop, looping each element of S, for copying the elements.
+Similarly there is another for loop, outwith the previous for loop, that iterates over the length of S. 
+
+Hence, O(n) + O(n) = O(2n) = O(n)
+
+## Question 2
+JavaImplentation for certain methods
+
+public void addFront(E s) {
+	Node x = new Node(s);
+	if (head == null) {
+		this.head = x;
+	} else {
+		x.setNext(this.head);
+		this.head = x;
+	}
+	this.size++;
+}
+
+public boolean equals(List<E> L) {
+	if (this.size != L.size()) {
+		return false;
+	} else { 
+		Node l = L.getHead();
+		Node x = this.head();
+		while (l != null && x != null) {
+			if (l.getElement() != x.getElement()) {
+				return false;
+			}
+			l = l.getNext();
+			x = x.getNext();
+		}
+	}
+	return true;
+}
+
+public boolean isPresent(E s) {
+	Node x = this.head();
+	while (x != null) {
+		if (x.getElement() == s) {
+			return true;
+		}
+		x = x.getNext();
+	}
+	return false;
+}
+
+public List<E> intersection(List<E> L) {
+	List<E> intersect = new ArrayList<E>();
+	for (E element : L) { 
+		if (this.isPresent(element.getElement())) {
+			intersect.add(element);
+		}
+	}
+	return intersect;
+}
+
+
+b)
+Complexity of each method:
+addFront: O(1)
+equals: O(n)
+isPresent: O(n)
+intersection: O(nm) (n,m are sizes of the two linked lists)
+
+## Question 3
+
+a) 
+Drawing done on paper.
+
+b) 
+Preorder:
+30, 24, 11, 13, 26, 40, 36, 58
+
+Inorder:
+11, 13, 24, 26, 30, 36, 40, 58
+
+Postorder:
+13, 11, 26, 24, 36, 58, 40, 30
+
+c) 
+Drawn on paper
+Find the in order successor of the root node.
+Swap the root with the root's successor.
+Delete the old root (which is as the position of the successor).
+
+Root's successor is the leftmost of the right child.
+
+d)
+The height of a BST is the number of levels to a tree.
+Alternatively, it is the longest route of edge nodes to a leaf node.
+
+The minimum height is log_2_1023 (log with base 2) = 10
+Hence, minimum height is 10 
+
+Maximum height is 1023. 
+Maximum height would occur when all elements inserted are either consecutively larger/smaller than the previous. Creating a right-skewed/left-skewed BST respectively.
+
+e)
+An AVL tree is a self-balancing BST. 
+Effectively, it ensures that the difference in height between left and right subtrees cannot be more than one.
+
+Assuming worst case is left-skewed (each element inserted is smaller than the last).
+It avoids worst case scenario because AVL balances on insertion.
+This would mean that each time an element is inserted, the tree would be rearranged such that there is a new root node that forces the tree to have a right subtree.
+
+Therefore, the height would be reduced.
+
+Easiest way to imagine fixing a left-skewed tree is by imagining that someone is holding both ends of tree and they pull the root node around a peg. 
+AVL would balance it better than that but that is the basic premise of the balancing.
+
+
+f) 
+The right hand tree is an AVL tree. 
+The root's left subtree has a height of 4. 
+The root's right subtree has a height of 3. 
+
+Height of 2's left subtree is height 2.
+Height of 2's right subtree is height 3.
+
+Basically, the subtree height's of each node do not differ in height more than one in the right side tree.
+
+The left side tree is not an AVL tree. 
+The left subtree height is 4. 
+The right subtree height is 2.
+
+This does not satisfy the conditions of an AVL tree.
+
+## Question 4
+a) 
+
+private static int locateMax(int[] S, int upb) {
+	int maxNumIndex = 0;
+	for (int i=0; i < upb; i++) {
+		if (S[i] > S[maxNumIndex]) 
+			maxNumIndex = i;
+	}
+	return maxNumIndex;
+}
+
+b) 
+
+public static void selectionSort(int[] S) {
+	int n = S.length;
+	for (int i=n; i > 0 ; i--) {
+		int maxIndex = locateMax(S, i);
+		swap(S, i-1 , maxIndex);
+	}
+}
+

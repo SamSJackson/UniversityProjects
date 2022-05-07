@@ -1,0 +1,10 @@
+3c)
+
+The worst case for quicksort with a single pivot point is when only one element is removed.
+This would work such that only one element is lost each time a partition is found.
+Therefore, you would have to sort all the elements, everytime you remove an element, which is O(n^2).
+
+For middle pivot, this would happen if the middle element is always the largest pivot.
+
+This would be achieved with the array:
+[1,3,5,7,8,6,4,2]

@@ -21,6 +21,7 @@ Although this can go badly if the rightmost element is always the largest/smalle
 This will create a lopsided partition.
 
 Imagine:
+You choose the pivot point.
 You hammer the pivot point in place.
 All elements less than the pivot go on the left, all elements greater go on right.
 You continue this until you realise all elements have been nailed in place.
@@ -41,7 +42,7 @@ import random
 
 def partition(arr : list, low : int, high : int) -> int:
 	i = low - 1
-	pivot = arr[high]
+	pivot = (low + high+1) / 2
 
 	for j in range(low, high):
 		if arr[j] < pivot:
@@ -56,6 +57,11 @@ def quick_sort(arr : list, low : int=None , high : int=None) -> list:
 	high = len(arr)-1 if high == None else high
 	if (low < high):
 		part = partition(arr, low, high)
+		print(f"{arr[:part]=}, {arr[part:]=}")
 		quick_sort(arr, low, part-1)
 		quick_sort(arr, part+1, high)
 	return arr
+ 
+if __name__ == '__main__':
+	array = [1,3,5,7,8,6,4,2]
+	quick_sort(array)
