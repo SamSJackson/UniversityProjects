@@ -1,0 +1,63 @@
+## Section B
+
+## Question 5
+a)
+We want different functionality for different property of car.
+
+Strategy pattern is the design pattern I would use.
+
+I would use this because different level of car wash would provide different quality.
+Therefore, I want to have a method of wash car that can select the correct level, given what the user wants.
+Strategy would enable abstraction and encapsulation, with a WashCar interface, SilverWash, GoldWash and PlatinumWash implementing the WashCar interface.
+
+b) 
+
+Class Diagram on paper.
+
+c)
+The design pattern would implemented as such:
+
+WashType is an enumerated type with 
+SILVER,
+GOLD,
+PLATNUM;
+
+An interface of WashCar would be created, with the method of carWash(), no parameters.
+
+SilverWash, GoldWash, PlatinumWash are concrete implementations of WashCar.
+
+SilverWash carWash() contains only washing.
+GoldWash carWash() contains washing and drying.
+Platinum carWash() contains washing, drying and polishing.
+
+CarWashSystem is the primary class, which will contain the main method.
+CarWashSystem will contain an object of type WashCar. 
+CarWashSystem will overload WashCar with a method of carWash(WashType washTypeEnum)
+Taking the enum, we create an object of type SilverWash, GoldWash or PlatinumWash, then call carWash() on that object.
+
+A very good improvement would be to use the singleton design pattern on the SilverWash, GoldWash and PlatinumWash classes.
+
+
+## Question 6
+a)
+
+The observer design pattern can address this problem by grouping all of the features that watch this data into a set interface and tell all appropriate classes about the update of the AQI when it is changed, ensuring the correct display of information.
+
+This would also ensure the developers get data updates because all of the data is updated to all listeners as soon as it is updated on the primary device.
+
+Drawing of observer on paper.
+
+b)
+Possible drawback of using observer in this case:
+The AQI is being updated by different sensors which would mean that updates may happen at the same time which could overload the monitoring and/or observing systems.
+
+This could be solved with a push/pull system where the observers only receive data when they want (or the subject only sends data when it wants to). This could be a constant interval pull (only pull every 20 seconds) or limited pull (pull for 10 minutes).
+
+c) 
+Singleton could be used to ensure that not more than one AQI class is made but it would ensure that every class is having the data updated at the same time. Hence, not solving the same problems that observer solves as a design pattern.
+
+
+## Question 7 
+
+a)
+
